@@ -16,16 +16,22 @@ cache:
 
 build:
   stage: build
+  tags:
+    - maven
   script:
     - mvn $MAVEN_CLI_OPTS compile
 
 test:
   stage: test
+  tags:
+    - maven
   script:
     - mvn $MAVEN_CLI_OPTS test
 
 run:
   stage: run
+  tags:
+    - maven
   script:
     - mvn $MAVEN_CLI_OPTS package
     - mvn $MAVEN_CLI_OPTS exec:java -Dexec.mainClass="main.Calculator"
