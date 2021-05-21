@@ -1,16 +1,22 @@
 package computer;
 
-public class Number {
+public class Number implements Operand {
     
     private double number;
+    private String name;
     private final static Double EPSILON = 0.000001d;
 
-    public Number(final double number) {
+    public Number(final double number, final String name) {
         this.number = number;
+        this.name = name;
     }
 
-    public double get() {
-        return number;
+    public double getValue() {
+        return this.number;
+    }
+
+    public String getDescription() {
+    	return this.name;
     }
 
     @Override
@@ -18,7 +24,7 @@ public class Number {
         final int prime = 31;
         int result = 1;
         long temp;
-        temp = Double.doubleToLongBits(number);
+        temp = Double.doubleToLongBits(this.number);
         result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
@@ -31,15 +37,15 @@ public class Number {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Number other = (Number) obj;
-        if (Double.doubleToLongBits(number) != Double.doubleToLongBits(other.number))
+        final Number other = (Number) obj;
+        if (Double.doubleToLongBits(this.number) != Double.doubleToLongBits(other.number))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return Double.toString(number);
+        return Double.toString(this.number);
     }
 
     public static boolean approximateEquals(final Number n1,

@@ -10,15 +10,13 @@ class MultiplierTest {
     void basicMultiplication() {
 
         // -- arrange
-    	final Multiplier multiplier = new Multiplier();
-        final Number n1 = new Number(1.3d);
-        final Number n2 = new Number(0.7d);
-        final Number expected = new Number(0.91d);
+        final Number n1 = new Number(1.3d, "n1");
+        final Number n2 = new Number(0.7d, "n2");
         
         // -- act
-        final Number effective = multiplier.operate(n1, n2);
+        final Operand effective = new Multiplier(n1, n2);
 
         // -- assert
-        assertTrue(Number.approximateEquals(expected, effective));
+        assertEquals(0.91d, effective.getValue(), 0.0001d);
     }
 }

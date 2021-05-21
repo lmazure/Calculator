@@ -10,15 +10,13 @@ class AdderTest {
     void basicAddition() {
 
         // -- arrange
-    	final Adder adder = new Adder();
-        final Number n1 = new Number(1.3d);
-        final Number n2 = new Number(0.7d);
-        final Number expected = new Number(2.0d);
+        final Number n1 = new Number(1.3d, "n1");
+        final Number n2 = new Number(0.7d, "n2");
         
         // -- act
-        final Number effective = adder.operate(n1, n2);
+        final Operand effective = new Adder(n1, n2);
 
         // -- assert
-        assertTrue(Number.approximateEquals(expected, effective));
+        assertEquals(2.0d, effective.getValue(), 0.0001d);
     }
 }
