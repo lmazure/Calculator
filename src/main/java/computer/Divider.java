@@ -8,7 +8,11 @@ public class Divider extends BinaryOperator {
 
 	@Override
 	public double getValue() {
-		return o1.getValue() / o2.getValue();
+		final double result =  o1.getValue() / o2.getValue();
+		if (!Double.isFinite(result)) {
+			throw new ArithmeticException("Division by zero");
+		}
+		return result;
 	}
 
 	@Override
