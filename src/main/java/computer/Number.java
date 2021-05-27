@@ -1,7 +1,7 @@
 package computer;
 
 public class Number implements Operand {
-    
+
     private double number;
     private String name;
     private final static Double EPSILON = 0.000001d;
@@ -16,7 +16,7 @@ public class Number implements Operand {
     }
 
     public String getDescription() {
-    	return this.name;
+        return this.name;
     }
 
     @Override

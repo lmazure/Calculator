@@ -21,7 +21,7 @@ public class Calculator {
         printOperand(n5);
         System.out.println("--- End ---");
     }
-    
+
     private static void printOperand(final Operand o) {
         System.out.println(o.getDescription() + " = " + o.getValue());
     }

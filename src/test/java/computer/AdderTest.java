@@ -12,7 +12,7 @@ class AdderTest {
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
         final Number n2 = new Number(0.7d, "n2");
-        
+
         // -- act
         final Operand effective = new Adder(n1, n2);
 
@@ -26,7 +26,7 @@ class AdderTest {
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
         final Number n2 = new Number(0.7d, "n2");
-        
+
         // -- act
         final Operand effective = new Adder(n1, n2);
 
