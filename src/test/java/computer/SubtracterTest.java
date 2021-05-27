@@ -12,7 +12,7 @@ public class SubtracterTest {
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
         final Number n2 = new Number(1.7d, "n2");
-        
+
         // -- act
         final Operand effective = new Subtracter(n1, n2);
 
@@ -26,7 +26,7 @@ public class SubtracterTest {
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
         final Number n2 = new Number(1.7d, "n2");
-        
+
         // -- act
         final Operand effective = new Subtracter(n1, n2);
 
