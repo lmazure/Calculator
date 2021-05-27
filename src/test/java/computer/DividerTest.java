@@ -12,7 +12,7 @@ public class DividerTest {
         // -- arrange
         final Number n1 = new Number(2.0d, "n1");
         final Number n2 = new Number(0.3d, "n2");
-        
+
         // -- act
         final Operand effective = new Divider(n1, n2);
 
@@ -22,32 +22,32 @@ public class DividerTest {
 
     @Test
     void checkDivisionByZero() {
-    	assertThrows(ArithmeticException.class,
+        assertThrows(ArithmeticException.class,
             ()->{
-		        // -- arrange
-		        final Number n1 = new Number(1.0d, "n1");
-		        final Number n2 = new Number(0.0d, "n2");
-		        
-		        // -- act
-				final Operand effective = new Divider(n1, n2);
+                // -- arrange
+                final Number n1 = new Number(1.0d, "n1");
+                final Number n2 = new Number(0.0d, "n2");
 
-				// -- assert
+                // -- act
+                final Operand effective = new Divider(n1, n2);
+
+                // -- assert
                 System.out.println("resurt = " + effective.getValue());
             });
     }
 
     @Test
     void checkZeroDividedByZero() {
-    	assertThrows(ArithmeticException.class,
+        assertThrows(ArithmeticException.class,
             ()->{
-		        // -- arrange
-		        final Number n1 = new Number(0.0d, "n1");
-		        final Number n2 = new Number(0.0d, "n2");
-		        
-		        // -- act
-				final Operand effective = new Divider(n1, n2);
+                // -- arrange
+                final Number n1 = new Number(0.0d, "n1");
+                final Number n2 = new Number(0.0d, "n2");
 
-				// -- assert
+                // -- act
+                final Operand effective = new Divider(n1, n2);
+
+                // -- assert
                 System.out.println("resurt = " + effective.getValue());
             });
     }
@@ -57,7 +57,7 @@ public class DividerTest {
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
         final Number n2 = new Number(1.7d, "n2");
-        
+
         // -- act
         final Operand effective = new Divider(n1, n2);
 
