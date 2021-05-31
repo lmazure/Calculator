@@ -1,17 +1,8 @@
 package computer;
 
-public class Logarithm extends UnaryOperator {
-    protected Logarithm(final Operand o1) {
-        super(o1);
-    }
+public class Logarithm extends JavaMathUnaryOperator {
 
-    @Override
-    public double getValue() {
-        return Math.log(o1.getValue());
-    }
-
-    @Override
-    public String getDescription() {
-        return "ln(" + o1.getDescription() + ")";
+    public Logarithm(final Operand o1) {
+        super(o1, Math::log, "ln(", ")");
     }
 }

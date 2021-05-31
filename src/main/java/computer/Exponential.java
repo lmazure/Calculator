@@ -1,18 +1,8 @@
 package computer;
 
-public class Exponential extends UnaryOperator {
+public class Exponential extends JavaMathUnaryOperator {
 
-    protected Exponential(final Operand o1) {
-        super(o1);
-    }
-
-    @Override
-    public double getValue() {
-        return Math.exp(o1.getValue());
-    }
-
-    @Override
-    public String getDescription() {
-        return "e^(" + o1.getDescription() + ")";
+    public Exponential(final Operand o1) {
+        super(o1, Math::exp, "e^(", ")");
     }
 }
