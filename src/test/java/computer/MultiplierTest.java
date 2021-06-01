@@ -32,4 +32,5 @@ class MultiplierTest {
 
         // -- assert
         assertEquals("(n1) * (n2)", effective.getDescription());
-    }}
+    }
+}

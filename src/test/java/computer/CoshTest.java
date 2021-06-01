@@ -4,19 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class ExponentialTest {
+public class CoshTest {
 
     @Test
     void checkValue() {
 
         // -- arrange
-        final Number n1 = new Number(1.3d, "n1");
+        final double value = 1.3d;
+        final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Exponential(n1);
+        final Operand effective = new Cosh(n1);
 
         // -- assert
-        assertEquals(Math.exp(1.3d), effective.getValue(), 0.0001d);
+        assertEquals(Math.cosh(value), effective.getValue(), 0.0001d);
     }
 
     @Test
@@ -26,9 +27,9 @@ public class ExponentialTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Exponential(n1);
+        final Operand effective = new Cosh(n1);
 
         // -- assert
-        assertEquals("e^(n1)", effective.getDescription());
+        assertEquals("cosh(n1)", effective.getDescription());
     }
 }
