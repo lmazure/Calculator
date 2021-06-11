@@ -32,7 +32,7 @@ public class DividerTest {
                 final Operand effective = new Divider(n1, n2);
 
                 // -- assert
-                System.out.println("resurt = " + effective.getValue());
+                System.out.println("result = " + effective.getValue());
             });
     }
 
@@ -48,7 +48,7 @@ public class DividerTest {
                 final Operand effective = new Divider(n1, n2);
 
                 // -- assert
-                System.out.println("resurt = " + effective.getValue());
+                System.out.println("result = " + effective.getValue());
             });
     }
 
