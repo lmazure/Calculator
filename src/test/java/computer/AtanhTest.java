@@ -14,7 +14,7 @@ public class AtanhTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Atanh(n1);
+        final Operand effective = new AtanhOperator(n1);
 
         // -- assert
         // Math.tanh does not exist, so we use Math.tanh to cjeck
@@ -28,7 +28,7 @@ public class AtanhTest {
         final Number n1 = new Number(0.3d, "n1");
  
         // -- act
-        final Operand effective = new Atanh(n1);
+        final Operand effective = new AtanhOperator(n1);
 
         // -- assert
         assertEquals("arctanh(n1)", effective.getDescription());

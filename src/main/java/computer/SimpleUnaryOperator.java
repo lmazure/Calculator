@@ -2,13 +2,13 @@ package computer;
 
 import java.util.function.Function;
 
-class JavaMathUnaryOperator extends UnaryOperator {
+class SimpleUnaryOperator extends UnaryOperator {
 
     private final Function<Double, Double> function;
     private final String prefix;
     private final String suffix;
 
-    protected JavaMathUnaryOperator(final Operand o1,
+    protected SimpleUnaryOperator(final Operand o1,
                                     final Function<Double, Double> function,
                                     final String prefix,
                                     final String suffix) {
@@ -27,5 +27,4 @@ class JavaMathUnaryOperator extends UnaryOperator {
     public String getDescription() {
         return this.prefix + o1.getDescription() + this.suffix;
     }
-
 }

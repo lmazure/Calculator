@@ -1,8 +1,8 @@
 package computer;
 
-public class Adder extends BinaryOperator {
+public class AddOperator extends BinaryOperator {
 
-    public Adder(final Operand o1, final Operand o2) {
+    public AddOperator(final Operand o1, final Operand o2) {
         super(o1, o2);
     }
 

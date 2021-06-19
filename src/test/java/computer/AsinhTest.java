@@ -14,7 +14,7 @@ public class AsinhTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Asinh(n1);
+        final Operand effective = new AsinhOperator(n1);
 
         // -- assert
         // Math.asinh does not exist, so we use Math.sinh to check
@@ -28,7 +28,7 @@ public class AsinhTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Asinh(n1);
+        final Operand effective = new AsinhOperator(n1);
 
         // -- assert
         assertEquals("arcsinh(n1)", effective.getDescription());

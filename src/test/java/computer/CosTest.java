@@ -14,7 +14,7 @@ public class CosTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Cos(n1);
+        final Operand effective = new CosOperator(n1);
 
         // -- assert
         assertEquals(Math.cos(value), effective.getValue(), 0.0001d);
@@ -27,7 +27,7 @@ public class CosTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Cos(n1);
+        final Operand effective = new CosOperator(n1);
 
         // -- assert
         assertEquals("cos(n1)", effective.getDescription());
