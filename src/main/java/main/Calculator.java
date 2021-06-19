@@ -51,7 +51,7 @@ public class Calculator {
         parser.addOperatorClass(AtanhOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
-        final Operand o = parser.parse(Arrays.asList(new String[] { "2", "1", "asin", "multiply", "add" }));
+        final Operand o = parser.parse(Arrays.asList(new String[] { "2", "1", "asin", "multiply" }));
         printOperand(o);
     }
 
