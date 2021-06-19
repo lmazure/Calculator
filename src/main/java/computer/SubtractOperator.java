@@ -1,8 +1,8 @@
 package computer;
 
-public class Subtracter extends BinaryOperator {
+public class SubtractOperator extends BinaryOperator {
 
-    public Subtracter(final Operand o1, final Operand o2) {
+    public SubtractOperator(final Operand o1, final Operand o2) {
         super(o1, o2);
     }
 

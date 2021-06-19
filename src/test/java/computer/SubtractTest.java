@@ -4,19 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class LogarithmTest {
+public class SubtractTest {
 
     @Test
     void checkValue() {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+        final Number n2 = new Number(1.7d, "n2");
+
         // -- act
-        final Operand effective = new Logarithm(n1);
+        final Operand effective = new SubtractOperator(n1, n2);
 
         // -- assert
-        assertEquals(Math.log(1.3d), effective.getValue(), 0.0001d);
+        assertEquals(-0.4d, effective.getValue(), 0.0001d);
     }
 
     @Test
@@ -24,11 +25,12 @@ public class LogarithmTest {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+        final Number n2 = new Number(1.7d, "n2");
+
         // -- act
-        final Operand effective = new Logarithm(n1);
+        final Operand effective = new SubtractOperator(n1, n2);
 
         // -- assert
-        assertEquals("ln(n1)", effective.getDescription());
+        assertEquals("(n1) - (n2)", effective.getDescription());
     }
 }
