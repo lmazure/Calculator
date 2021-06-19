@@ -1,8 +1,8 @@
 package computer;
 
-public class Powerer extends BinaryOperator {
+public class PowerOperator extends BinaryOperator {
 
-    public Powerer(final Operand o1, final Operand o2) {
+    public PowerOperator(final Operand o1, final Operand o2) {
         super(o1, o2);
     }
 

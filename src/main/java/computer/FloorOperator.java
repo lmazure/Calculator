@@ -1,8 +1,8 @@
 package computer;
 
-public class FloorOperator extends JavaMathUnaryOperator {
+public class FloorOperator extends SimpleUnaryOperator {
 
-    protected FloorOperator(final Operand o1) {
+    public FloorOperator(final Operand o1) {
         super(o1, Math::floor, "⌊", "⌋");
     }
 }

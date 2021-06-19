@@ -14,7 +14,7 @@ public class AcoshTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Acosh(n1);
+        final Operand effective = new AcoshOperator(n1);
 
         // -- assert
         // Math.acosh does not exist, so we use Math.cosh to check
@@ -28,7 +28,7 @@ public class AcoshTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Acosh(n1);
+        final Operand effective = new AcoshOperator(n1);
 
         // -- assert
         assertEquals("arccosh(n1)", effective.getDescription());

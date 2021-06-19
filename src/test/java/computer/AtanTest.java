@@ -14,7 +14,7 @@ public class AtanTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Atan(n1);
+        final Operand effective = new AtanOperator(n1);
 
         // -- assert
         assertEquals(Math.atan(value), effective.getValue(), 0.0001d);
@@ -27,7 +27,7 @@ public class AtanTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Atan(n1);
+        final Operand effective = new AtanOperator(n1);
 
         // -- assert
         assertEquals("arctan(n1)", effective.getDescription());

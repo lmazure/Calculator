@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class MultiplierTest {
+ public class MultiplyTest {
 
     @Test
     void checkValue() {
@@ -14,7 +14,7 @@ class MultiplierTest {
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new Multiplier(n1, n2);
+        final Operand effective = new MultiplyOperator(n1, n2);
 
         // -- assert
         assertEquals(0.91d, effective.getValue(), 0.0001d);
@@ -28,7 +28,7 @@ class MultiplierTest {
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new Multiplier(n1, n2);
+        final Operand effective = new MultiplyOperator(n1, n2);
 
         // -- assert
         assertEquals("(n1) * (n2)", effective.getDescription());

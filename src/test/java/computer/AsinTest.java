@@ -14,7 +14,7 @@ public class AsinTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Asin(n1);
+        final Operand effective = new AsinOperator(n1);
 
         // -- assert
         assertEquals(Math.asin(value), effective.getValue(), 0.0001d);
@@ -27,7 +27,7 @@ public class AsinTest {
         final Number n1 = new Number(0.3d, "n1");
  
         // -- act
-        final Operand effective = new Asin(n1);
+        final Operand effective = new AsinOperator(n1);
 
         // -- assert
         assertEquals("arcsin(n1)", effective.getDescription());

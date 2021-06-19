@@ -14,7 +14,7 @@ public class AcosTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Acos(n1);
+        final Operand effective = new AcosOperator(n1);
 
         // -- assert
         assertEquals(Math.acos(value), effective.getValue(), 0.0001d);
@@ -27,7 +27,7 @@ public class AcosTest {
         final Number n1 = new Number(0.3d, "n1");
  
         // -- act
-        final Operand effective = new Acos(n1);
+        final Operand effective = new AcosOperator(n1);
 
         // -- assert
         assertEquals("arccos(n1)", effective.getDescription());

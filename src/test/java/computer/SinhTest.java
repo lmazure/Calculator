@@ -14,7 +14,7 @@ public class SinhTest {
         final Number n1 = new Number(value, "n1");
  
         // -- act
-        final Operand effective = new Sinh(n1);
+        final Operand effective = new SinhOperator(n1);
 
         // -- assert
         assertEquals(Math.sinh(value), effective.getValue(), 0.0001d);
@@ -27,7 +27,7 @@ public class SinhTest {
         final Number n1 = new Number(1.3d, "n1");
  
         // -- act
-        final Operand effective = new Sinh(n1);
+        final Operand effective = new SinhOperator(n1);
 
         // -- assert
         assertEquals("sinh(n1)", effective.getDescription());

@@ -31,16 +31,17 @@ public class Number implements Operand {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         final Number other = (Number) obj;
-        if (Double.doubleToLongBits(this.number) != Double.doubleToLongBits(other.number))
-            return false;
-        return true;
+        return (Double.doubleToLongBits(this.number) == Double.doubleToLongBits(other.number));
     }
 
     @Override
@@ -53,4 +54,3 @@ public class Number implements Operand {
         return Math.abs(n1.number - n2.number) < EPSILON;
     }
 }
-

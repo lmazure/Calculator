@@ -1,28 +1,62 @@
 package main;
 
-import computer.Adder;
-import computer.Multiplier;
-import computer.Number;
+import java.util.Arrays;
+
+import computer.AcosOperator;
+import computer.AcoshOperator;
+import computer.AddOperator;
+import computer.AsinOperator;
+import computer.AsinhOperator;
+import computer.AtanOperator;
+import computer.AtanhOperator;
+import computer.CeilOperator;
+import computer.CosOperator;
+import computer.CoshOperator;
+import computer.DivideOperator;
+import computer.ExpOperator;
+import computer.FloorOperator;
+import computer.LnOperator;
+import computer.MultiplyOperator;
 import computer.Operand;
+import computer.PowerOperator;
+import computer.SinOperator;
+import computer.SinhOperator;
+import computer.SubtractOperator;
+import computer.TanOperator;
+import computer.TanhOperator;
 
 
 public class Calculator {
 
     public static void main (String[] args) {
-        System.out.println("--- Start ---");
-        final Number n1 = new Number(1.3d, "n1");
-        final Number n2 = new Number(0.7d, "n2");
-        final Number n3 = new Number(1.1d, "n3");
-        final Operand n4 = new Adder(n1, n2);
-        final Operand n5 = new Multiplier(n4, n3);
-        printOperand(n1);
-        printOperand(n2);
-        printOperand(n3);
-        printOperand(n5);
-        System.out.println("--- End ---");
+        final Parser parser = new Parser();
+        parser.addOperatorClass(AddOperator.class);
+        parser.addOperatorClass(SubtractOperator.class);
+        parser.addOperatorClass(MultiplyOperator.class);
+        parser.addOperatorClass(DivideOperator.class);
+        parser.addOperatorClass(PowerOperator.class);
+        parser.addOperatorClass(ExpOperator.class);
+        parser.addOperatorClass(LnOperator.class);
+        parser.addOperatorClass(CosOperator.class);
+        parser.addOperatorClass(SinOperator.class);
+        parser.addOperatorClass(TanOperator.class);
+        parser.addOperatorClass(CoshOperator.class);
+        parser.addOperatorClass(SinhOperator.class);
+        parser.addOperatorClass(TanhOperator.class);
+        parser.addOperatorClass(AcosOperator.class);
+        parser.addOperatorClass(AsinOperator.class);
+        parser.addOperatorClass(AtanOperator.class);
+        parser.addOperatorClass(AcoshOperator.class);
+        parser.addOperatorClass(AsinhOperator.class);
+        parser.addOperatorClass(AtanhOperator.class);
+        parser.addOperatorClass(CeilOperator.class);
+        parser.addOperatorClass(FloorOperator.class);
+        final Operand o = parser.parse(Arrays.asList(new String[] { "2", "1", "asin", "multiply" }));
+        printOperand(o);
     }
 
     private static void printOperand(final Operand o) {
         System.out.println(o.getDescription() + " = " + o.getValue());
     }
+
 }

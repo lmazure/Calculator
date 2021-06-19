@@ -14,7 +14,7 @@ public class DividerTest {
         final Number n2 = new Number(0.3d, "n2");
 
         // -- act
-        final Operand effective = new Divider(n1, n2);
+        final Operand effective = new DivideOperator(n1, n2);
 
         // -- assert
         assertEquals(6.66666666666666666667d, effective.getValue(), 0.0001d);
@@ -29,7 +29,7 @@ public class DividerTest {
                 final Number n2 = new Number(0.0d, "n2");
 
                 // -- act
-                final Operand effective = new Divider(n1, n2);
+                final Operand effective = new DivideOperator(n1, n2);
 
                 // -- assert
                 System.out.println("result = " + effective.getValue());
@@ -45,7 +45,7 @@ public class DividerTest {
                 final Number n2 = new Number(0.0d, "n2");
 
                 // -- act
-                final Operand effective = new Divider(n1, n2);
+                final Operand effective = new DivideOperator(n1, n2);
 
                 // -- assert
                 System.out.println("result = " + effective.getValue());
@@ -59,7 +59,7 @@ public class DividerTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new Divider(n1, n2);
+        final Operand effective = new DivideOperator(n1, n2);
 
         // -- assert
         assertEquals("(n1) / (n2)", effective.getDescription());

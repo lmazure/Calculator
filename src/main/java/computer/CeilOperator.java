@@ -1,8 +1,8 @@
 package computer;
 
-public class CeilOperator extends JavaMathUnaryOperator {
+public class CeilOperator extends SimpleUnaryOperator {
 
-    protected CeilOperator(final Operand o1) {
+    public CeilOperator(final Operand o1) {
         super(o1, Math::ceil, "⌈", "⌉");
     }
 }

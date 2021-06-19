@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class PowererTest {
+public class PowerTest {
     @Test
     void checkValue() {
         // -- arrange
@@ -13,7 +13,7 @@ public class PowererTest {
         final Number n2 = new Number(2d, "n2");
 
         // -- act
-        final Operand effective = new Powerer(n1, n2);
+        final Operand effective = new PowerOperator(n1, n2);
 
         // -- assert
         assertEquals(0.09d, effective.getValue(), 0.0001d);
@@ -28,7 +28,7 @@ public class PowererTest {
                 final Number n2 = new Number(-0.2d, "n2");
 
                 // -- act
-                final Operand effective = new Powerer(n1, n2);
+                final Operand effective = new PowerOperator(n1, n2);
 
                 // -- assert
                 System.out.println("result = " + effective.getValue());
@@ -42,7 +42,7 @@ public class PowererTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new Powerer(n1, n2);
+        final Operand effective = new PowerOperator(n1, n2);
 
         // -- assert
         assertEquals("(n1) ^ (n2)", effective.getDescription());
