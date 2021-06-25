@@ -16,11 +16,11 @@ public class ModTest {
         final Operand effective = new ModOperator(n1, n2);
 
         // -- assert
-        assertEquals(6.66666666666666666667d, effective.getValue(), 0.0001d);
+        assertEquals(0.2d, effective.getValue(), 0.0001d);
     }
 
     @Test
-    void checkDivisionByZero() {
+    void checkModuloZero() {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
@@ -36,7 +36,7 @@ public class ModTest {
     }
 
     @Test
-    void checkZeroDividedByZero() {
+    void checkZeroModuloZero() {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
