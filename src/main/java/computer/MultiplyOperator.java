@@ -15,5 +15,4 @@ public class MultiplyOperator extends BinaryOperator {
     public String getDescription() {
         return "(" + o1.getDescription() + ") * (" + o2.getDescription() + ")";
     }
-
 }
