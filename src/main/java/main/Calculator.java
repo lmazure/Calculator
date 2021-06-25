@@ -16,6 +16,7 @@ import computer.DivideOperator;
 import computer.ExpOperator;
 import computer.FloorOperator;
 import computer.LnOperator;
+import computer.ModOperator;
 import computer.MultiplyOperator;
 import computer.Operand;
 import computer.PowerOperator;
@@ -34,6 +35,7 @@ public class Calculator {
         parser.addOperatorClass(SubtractOperator.class);
         parser.addOperatorClass(MultiplyOperator.class);
         parser.addOperatorClass(DivideOperator.class);
+        parser.addOperatorClass(ModOperator.class);
         parser.addOperatorClass(PowerOperator.class);
         parser.addOperatorClass(ExpOperator.class);
         parser.addOperatorClass(LnOperator.class);

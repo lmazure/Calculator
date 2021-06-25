@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-public class DividerTest {
+public class DivideTest {
 
     @Test
     void checkValue() {
@@ -64,5 +64,4 @@ public class DividerTest {
         // -- assert
         assertEquals("(n1) / (n2)", effective.getDescription());
     }
-
 }
