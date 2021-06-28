@@ -19,6 +19,12 @@ public class Number implements Operand {
         return this.name;
     }
 
+
+    @Override
+    public String getLatex() {
+        return this.name;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

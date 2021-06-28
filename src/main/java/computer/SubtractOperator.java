@@ -15,4 +15,9 @@ public class SubtractOperator extends BinaryOperator {
     public String getDescription() {
         return "(" + o1.getDescription() + ") - (" + o2.getDescription() + ")";
     }
+
+    @Override
+    public String getLatex() {
+        return "\\left(" + o1.getLatex() + "\\right)-\\left(" + o2.getLatex() + "\\right)";
+    }
 }

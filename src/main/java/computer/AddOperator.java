@@ -2,7 +2,8 @@ package computer;
 
 public class AddOperator extends BinaryOperator {
 
-    public AddOperator(final Operand o1, final Operand o2) {
+    public AddOperator(final Operand o1,
+                       final Operand o2) {
         super(o1, o2);
     }
 
@@ -14,5 +15,10 @@ public class AddOperator extends BinaryOperator {
     @Override
     public String getDescription() {
         return "(" + o1.getDescription() + ") + (" + o2.getDescription() + ")";
+    }
+
+    @Override
+    public String getLatex() {
+        return "\\left(" + o1.getLatex() + "\\right)+\\left(" + o2.getLatex() + "\\right)";
     }
 }

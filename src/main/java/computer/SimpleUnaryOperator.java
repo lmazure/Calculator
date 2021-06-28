@@ -2,16 +2,16 @@ package computer;
 
 import java.util.function.Function;
 
-class SimpleUnaryOperator extends UnaryOperator {
+abstract class SimpleUnaryOperator extends UnaryOperator {
 
     private final Function<Double, Double> function;
     private final String prefix;
     private final String suffix;
 
     protected SimpleUnaryOperator(final Operand o1,
-                                    final Function<Double, Double> function,
-                                    final String prefix,
-                                    final String suffix) {
+                                  final Function<Double, Double> function,
+                                  final String prefix,
+                                  final String suffix) {
         super(o1);
         this.function = function;
         this.prefix = prefix;
