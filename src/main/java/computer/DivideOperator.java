@@ -19,4 +19,9 @@ public class DivideOperator extends BinaryOperator {
     public String getDescription() {
         return "(" + o1.getDescription() + ") / (" + o2.getDescription() + ")";
     }
+
+    @Override
+    public String getLatex() {
+        return "\\frac{" + o1.getLatex() + "}{" + o2.getLatex() + "}";
+    }
 }

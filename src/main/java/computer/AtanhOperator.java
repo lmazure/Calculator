@@ -1,9 +1,9 @@
 package computer;
 
-public class AtanhOperator extends SimpleUnaryOperator {
+public class AtanhOperator extends SimpleBracketedUnaryOperator {
 
     public AtanhOperator(final Operand o1) {
-        super(o1, AtanhOperator::atanh, "arctanh(", ")");
+        super(o1, AtanhOperator::atanh, "arctanh");
     }
 
     private static Double atanh(final Double value) {

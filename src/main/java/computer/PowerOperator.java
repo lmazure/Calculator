@@ -19,4 +19,9 @@ public class PowerOperator extends BinaryOperator {
     public String getDescription() {
         return "(" + o1.getDescription() + ") ^ (" + o2.getDescription() + ")";
     }
+
+    @Override
+    public String getLatex() {
+        return "{\\left(" + o1.getLatex() + "\\right)}^{" + o2.getLatex() + "}";
+    }
 }

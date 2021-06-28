@@ -1,9 +1,9 @@
 package computer;
 
-public class AsinhOperator extends SimpleUnaryOperator {
+public class AsinhOperator extends SimpleBracketedUnaryOperator {
 
     public AsinhOperator(final Operand o1) {
-        super(o1, AsinhOperator::asinh, "arcsinh(", ")");
+        super(o1, AsinhOperator::asinh, "arcsinh");
     }
 
     private static Double asinh(final Double value) {

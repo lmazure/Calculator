@@ -1,8 +1,8 @@
 package computer;
 
-public class AtanOperator extends SimpleUnaryOperator {
+public class AtanOperator extends SimpleBracketedUnaryOperator {
 
     public AtanOperator(final Operand o1) {
-        super(o1, Math::atan, "arctan(", ")");
+        super(o1, Math::atan, "arctan");
     }
 }
