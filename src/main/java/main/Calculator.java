@@ -98,15 +98,15 @@ public class Calculator {
     private static void launchCodecogs(final Operand o) {
         System.out.println(o.getLatex());
         final String url = "https://latex.codecogs.com/svg.image?";
-        String u = "";
+        String encodedLatexExpression = "";
         try {
-            u = URLEncoder.encode(o.getLatex() + "=" + o.getValue(), StandardCharsets.UTF_8.toString());
+            encodedLatexExpression = URLEncoder.encode(o.getLatex() + "=" + o.getValue(), StandardCharsets.UTF_8.toString());
         } catch (final UnsupportedEncodingException e) {
             e.printStackTrace();
             System.exit(1);
         }
         try {
-            Desktop.getDesktop().browse(new URI(url + u));
+            Desktop.getDesktop().browse(new URI(url + encodedLatexExpression));
         } catch (final IOException | URISyntaxException e) {
             e.printStackTrace();
             System.exit(1);
