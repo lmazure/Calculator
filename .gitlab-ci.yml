@@ -35,9 +35,12 @@ test:
       junit:
         - target/surefire-reports/TEST-*.xml
 
-run:
+package:
   stage: package
   tags:
     - maven
   script:
     - mvn $MAVEN_CLI_OPTS package
+  artifacts:
+    paths:
+      - target/*.jar
