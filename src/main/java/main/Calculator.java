@@ -52,7 +52,7 @@ public class Calculator {
             for (;;) {
                 System.out.print( "> " );
                 final String input = reader.readLine();
-                if (input.length() == 0) {
+                if ((input == null) || (input.length() == 0)) {
                     break;
                 }
                 program.addLast(input);
