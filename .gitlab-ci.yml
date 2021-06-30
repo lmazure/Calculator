@@ -26,6 +26,7 @@ test:
   tags:
     - maven
   script:
+    - rm target/surefire-reports/TEST-*.xml
     - mvn $MAVEN_CLI_OPTS test
   artifacts:
     when: always
