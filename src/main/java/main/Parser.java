@@ -50,26 +50,26 @@ public class Parser {
         }
     }
 
-    public Operand parse(final List<String> program) {
+    public Operand parse(final List<String> expression) {
 
         int lineNumber = 0;
-        for (final String programLine: program) {
+        for (final String line: expression) {
             lineNumber++;
-            if (operators.containsKey(programLine)) {
-                final OperatorClassRecord classRecord = operators.get(programLine);
+            if (operators.containsKey(line)) {
+                final OperatorClassRecord classRecord = operators.get(line);
                 final Operand[] o = new Operand[classRecord.getParameterCount()];
                 for (int i = 0; i < classRecord.getParameterCount(); i++) {
                     final int paramNumber = classRecord.getParameterCount() - i;
                     if (stack.isEmpty()) {
-                        System.err.println("stack is empty when trying to get parameter number " + (i + 1) + " of operator \"" + programLine + "\" (line number " + lineNumber + ")");
+                        System.err.println("stack is empty when trying to get parameter number " + (i + 1) + " of operator \"" + line + "\" (line number " + lineNumber + ")");
                         System.exit(1);
                     }
                     o[paramNumber - 1] = this.stack.pop();
                 }
                 stack.push(classRecord.getConstructor().apply(o));
             } else {
-                final double value = Double.parseDouble(programLine);
-                stack.push(new computer.Number(value, programLine));
+                final double value = Double.parseDouble(line);
+                stack.push(new computer.Number(value, line));
             }
         }
         if (stack.isEmpty()) {

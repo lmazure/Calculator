@@ -2,11 +2,16 @@ package main;
 
 import java.awt.Desktop;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
@@ -37,15 +42,21 @@ import computer.TanhOperator;
 
 public class Calculator {
 
-    public static void main (final String[] args) {
-        final LinkedList<String> program = readProgram();
+    public static void main(final String[] args) {
+        final CommandLineParser commandLineParser = new CommandLineParser(args);
+        final LinkedList<String> expression = readExpression();
         final Parser parser = buildParser();
-        final Operand o = parser.parse(program);
+        final Operand o = parser.parse(expression);
         printOperand(o);
-        launchCodecogs(o);
+        if (commandLineParser.getDisplayInBrowser()) {
+            launchCodecogs(o);
+        }
+        if (commandLineParser.getSvgFileName().isPresent()) {
+            generateSvgFile(o, commandLineParser.getSvgFileName().get());
+        }
     }
 
-    private static LinkedList<String> readProgram() {
+    private static LinkedList<String> readExpression() {
         final LinkedList<String> program = new LinkedList<>();
         try {
             final BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
@@ -97,6 +108,56 @@ public class Calculator {
 
     private static void launchCodecogs(final Operand o) {
         System.out.println(o.getLatex());
+        try {
+            Desktop.getDesktop().browse(getUri(o));
+        } catch (final IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    private static void generateSvgFile(final Operand o,
+                                        final String filename) {
+        final String svgContent = getSvgContent(o);
+        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filename), StandardCharsets.UTF_8)) {
+            writer.write(svgContent);
+        } catch (final IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    private static String getSvgContent(final Operand o) {
+        final StringBuffer content = new StringBuffer();
+        try {
+            final HttpURLConnection connection = (HttpURLConnection) getUrl(o).openConnection();
+            connection.setRequestMethod("GET");
+            final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            connection.disconnect();
+        } catch (final IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return content.toString();
+    }
+
+    private static URL getUrl(final Operand o) {
+        final URI uri = getUri(o);
+        try {
+            return uri.toURL();
+        } catch (final MalformedURLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return null;
+    }
+
+    private static URI getUri(final Operand o) {
         final String url = "https://latex.codecogs.com/svg.image?";
         String encodedLatexExpression = "";
         try {
@@ -106,10 +167,11 @@ public class Calculator {
             System.exit(1);
         }
         try {
-            Desktop.getDesktop().browse(new URI(url + encodedLatexExpression));
-        } catch (final IOException | URISyntaxException e) {
+            return new URI(url + encodedLatexExpression);
+        } catch (final URISyntaxException e) {
             e.printStackTrace();
             System.exit(1);
         }
+        return null;
     }
 }
