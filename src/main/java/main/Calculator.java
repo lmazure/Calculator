@@ -35,8 +35,10 @@ import computer.MultiplyOperator;
 import computer.Operand;
 import computer.PowerOperator;
 import computer.ProductOperator;
+import computer.RoundOperator;
 import computer.SinOperator;
 import computer.SinhOperator;
+import computer.SqrtOperator;
 import computer.SubtractOperator;
 import computer.SumOperator;
 import computer.TanOperator;
@@ -86,6 +88,7 @@ public class Calculator {
         parser.addOperatorClass(DivideOperator.class);
         parser.addOperatorClass(ModOperator.class);
         parser.addOperatorClass(PowerOperator.class);
+        parser.addOperatorClass(SqrtOperator.class);
         parser.addOperatorClass(ExpOperator.class);
         parser.addOperatorClass(LnOperator.class);
         parser.addOperatorClass(CosOperator.class);
@@ -100,6 +103,7 @@ public class Calculator {
         parser.addOperatorClass(AcoshOperator.class);
         parser.addOperatorClass(AsinhOperator.class);
         parser.addOperatorClass(AtanhOperator.class);
+        parser.addOperatorClass(RoundOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
         parser.addOperatorClass(VarOperator.class);

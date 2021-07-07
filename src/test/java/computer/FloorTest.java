@@ -10,7 +10,7 @@ public class FloorTest {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+
         // -- act
         final Operand effective = new FloorOperator(n1);
 

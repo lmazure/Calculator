@@ -12,7 +12,7 @@ public class AtanhTest {
         // -- arrange
         final double value = 0.3d;
         final Number n1 = new Number(value, "n1");
- 
+
         // -- act
         final Operand effective = new AtanhOperator(n1);
 
@@ -26,7 +26,7 @@ public class AtanhTest {
 
         // -- arrange
         final Number n1 = new Number(0.3d, "n1");
- 
+
         // -- act
         final Operand effective = new AtanhOperator(n1);
 

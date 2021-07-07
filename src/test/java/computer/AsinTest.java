@@ -12,7 +12,7 @@ public class AsinTest {
         // -- arrange
         final double value = 0.3d;
         final Number n1 = new Number(value, "n1");
- 
+
         // -- act
         final Operand effective = new AsinOperator(n1);
 
@@ -25,7 +25,7 @@ public class AsinTest {
 
         // -- arrange
         final Number n1 = new Number(0.3d, "n1");
- 
+
         // -- act
         final Operand effective = new AsinOperator(n1);
 

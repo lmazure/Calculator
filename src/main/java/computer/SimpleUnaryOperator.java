@@ -17,7 +17,7 @@ abstract class SimpleUnaryOperator extends UnaryOperator {
         this.prefix = prefix;
         this.suffix = suffix;
     }
-    
+
     @Override
     public double getValue() {
         return this.function.apply(o1.getValue());
