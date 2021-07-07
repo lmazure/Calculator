@@ -8,17 +8,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+import computer.IncrementStack;
 import computer.Operand;
+import computer.SumOperator;
+import computer.VarOperator;
 
 public class Parser {
 
-    private LinkedList<Operand> stack = new LinkedList<>();
-    private Map<String, OperatorClassRecord> operators = new HashMap<String, OperatorClassRecord>();
+    private final LinkedList<Operand> stack = new LinkedList<>();
+    private final IncrementStack incrementStack = new IncrementStack();
+    private final Map<String, OperatorClassRecord> operators = new HashMap<String, OperatorClassRecord>();
+
+    // TODO remove the kludge for VarOperator and SumOperator
 
     public Parser() {
     }
 
     public void addOperatorClass(final Class<?> clazz) {
+        if (clazz.equals(SumOperator.class)) return;
+        if (clazz.equals(VarOperator.class)) return;
         try {
             final String className = clazz.getSimpleName();
             if (!className.endsWith("Operator")) {
@@ -67,6 +75,20 @@ public class Parser {
                     o[paramNumber - 1] = this.stack.pop();
                 }
                 stack.push(classRecord.getConstructor().apply(o));
+            } else if (line.equals("sum")) {
+                final Operand[] o = new Operand[3];
+                for (int i = 0; i < 3; i++) {
+                    final int paramNumber = 3 - i;
+                    if (stack.isEmpty()) {
+                        System.err.println("stack is empty when trying to get parameter number " + (i + 1) + " of operator \"" + line + "\" (line number " + lineNumber + ")");
+                        System.exit(1);
+                    }
+                    o[paramNumber - 1] = this.stack.pop();
+                }
+                stack.push(new SumOperator(o[0], o[1], o[2], incrementStack));
+            } else if (line.startsWith("var ")) {
+                final int varNumber = Integer.parseInt(line.substring(4));
+                stack.push(new VarOperator(varNumber, incrementStack));
             } else {
                 final double value = Double.parseDouble(line);
                 stack.push(new computer.Number(value, line));

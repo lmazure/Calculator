@@ -38,6 +38,9 @@ public class CommandLineParser {
                 i += 2;
                 break;
             }
+            System.err.println("unexpected argument: " + args[i]);
+            printHelp(System.err);
+            System.exit(1);
         }
         
         this.displayInBrowser = displayInBrowserTempo;
@@ -61,8 +64,8 @@ public class CommandLineParser {
 
     static private void printHelp(final PrintStream ps) {
         ps.println("options:");
-        ps.println("-h display this help");
-        ps.println("-b display the expression in a Browser");
+        ps.println("-h        display this help");
+        ps.println("-b        display the expression in a Browser");
         ps.println("-f <file> generate a SVG file of the expression");
     }
 }

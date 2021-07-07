@@ -37,8 +37,10 @@ import computer.PowerOperator;
 import computer.SinOperator;
 import computer.SinhOperator;
 import computer.SubtractOperator;
+import computer.SumOperator;
 import computer.TanOperator;
 import computer.TanhOperator;
+import computer.VarOperator;
 
 public class Calculator {
 
@@ -99,6 +101,8 @@ public class Calculator {
         parser.addOperatorClass(AtanhOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
+        parser.addOperatorClass(VarOperator.class);
+        parser.addOperatorClass(SumOperator.class);
         return parser;
     }
 
