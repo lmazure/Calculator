@@ -34,6 +34,7 @@ import computer.ModOperator;
 import computer.MultiplyOperator;
 import computer.Operand;
 import computer.PowerOperator;
+import computer.ProductOperator;
 import computer.SinOperator;
 import computer.SinhOperator;
 import computer.SubtractOperator;
@@ -103,6 +104,7 @@ public class Calculator {
         parser.addOperatorClass(FloorOperator.class);
         parser.addOperatorClass(VarOperator.class);
         parser.addOperatorClass(SumOperator.class);
+        parser.addOperatorClass(ProductOperator.class);
         return parser;
     }
 
