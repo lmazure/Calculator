@@ -11,7 +11,7 @@ public class LnTest {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+
         // -- act
         final Operand effective = new LnOperator(n1);
 
@@ -24,7 +24,7 @@ public class LnTest {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+
         // -- act
         final Operand effective = new LnOperator(n1);
 

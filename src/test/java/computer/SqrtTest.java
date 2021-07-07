@@ -4,20 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class AtanTest {
+public class SqrtTest {
 
     @Test
     void checkValue() {
 
         // -- arrange
-        final double value = 1.3d;
-        final Number n1 = new Number(value, "n1");
+        final Number n1 = new Number(1.69d, "n1");
 
         // -- act
-        final Operand effective = new AtanOperator(n1);
+        final Operand effective = new SqrtOperator(n1);
 
         // -- assert
-        assertEquals(Math.atan(value), effective.getValue(), 0.0001d);
+        assertEquals(1.3d, effective.getValue(), 0.0001d);
     }
 
     @Test
@@ -27,9 +26,9 @@ public class AtanTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AtanOperator(n1);
+        final Operand effective = new SqrtOperator(n1);
 
         // -- assert
-        assertEquals("arctan(n1)", effective.getDescription());
+        assertEquals("sqrt(n1)", effective.getDescription());
     }
 }

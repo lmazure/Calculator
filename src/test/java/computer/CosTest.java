@@ -12,7 +12,7 @@ public class CosTest {
         // -- arrange
         final double value = 1.3d;
         final Number n1 = new Number(value, "n1");
- 
+
         // -- act
         final Operand effective = new CosOperator(n1);
 
@@ -25,7 +25,7 @@ public class CosTest {
 
         // -- arrange
         final Number n1 = new Number(1.3d, "n1");
- 
+
         // -- act
         final Operand effective = new CosOperator(n1);
 

@@ -42,7 +42,7 @@ public class CommandLineParser {
             printHelp(System.err);
             System.exit(1);
         }
-        
+
         this.displayInBrowser = displayInBrowserTempo;
         this.svgFileName = svgFileNameTempo;
     }
