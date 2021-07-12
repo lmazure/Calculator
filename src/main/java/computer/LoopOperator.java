@@ -1,6 +1,7 @@
 package computer;
 
 import java.util.function.DoubleBinaryOperator;
+import java.util.stream.Collectors;
 
 abstract public class LoopOperator implements Operand {
 
@@ -51,7 +52,16 @@ abstract public class LoopOperator implements Operand {
     public String getDescription() {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
-        final String description = this.description + " for " + name + " equal " + this.o1.getDescription() + " to " + this.o2.getDescription() + " of { " + this.o3.getDescription() + " }";
+        final String description = this.description +
+                                  " for " + 
+                                  name + 
+                                  " equal " + 
+                                  this.o1.getDescription() + 
+                                  " to " + 
+                                  this.o2.getDescription() + 
+                                  " of {\n" + 
+                                  this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) + 
+                                  "\n}";
         this.incrementStack.discardTop();
         return description;
     }

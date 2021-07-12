@@ -18,13 +18,11 @@ public class Parser {
     private final IncrementStack incrementStack = new IncrementStack();
     private final Map<String, OperatorClassRecord> operators = new HashMap<String, OperatorClassRecord>();
 
-    // TODO remove the kludge for VarOperator and SumOperator
-
     public Parser() {
     }
 
     public void addOperatorClass(final Class<?> clazz) {
-        if (clazz.equals(VarOperator.class)) return;
+
         try {
             final String className = clazz.getSimpleName();
             if (!className.endsWith("Operator")) {
