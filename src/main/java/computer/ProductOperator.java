@@ -6,6 +6,6 @@ public class ProductOperator extends LoopOperator {
                            final Operand o2,
                            final Operand o3,
                            final IncrementStack incrementStack) {
-        super(o1, o2, o3, incrementStack, 0, (x,y) -> (x + y), "product", "prod");
+        super(o1, o2, o3, incrementStack, 1, (x,y) -> (x * y), "product", "prod");
     }
 }

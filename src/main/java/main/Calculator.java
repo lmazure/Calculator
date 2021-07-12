@@ -106,7 +106,6 @@ public class Calculator {
         parser.addOperatorClass(RoundOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
-        parser.addOperatorClass(VarOperator.class);
         parser.addOperatorClass(SumOperator.class);
         parser.addOperatorClass(ProductOperator.class);
         return parser;

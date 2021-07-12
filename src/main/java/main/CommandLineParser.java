@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.Optional;
 
 /**
- * parse the comman line arguments
+ * parse the command line arguments
  *
  */
 public class CommandLineParser {
