@@ -3,7 +3,7 @@ package computer;
 public class MultiplyOperator extends BinaryOperator {
 
     public MultiplyOperator(final Operand o1, final Operand o2) {
-        super(o1, o2);
+        super(o1, o2, "*", "\\times");
     }
 
     @Override
@@ -12,12 +12,9 @@ public class MultiplyOperator extends BinaryOperator {
     }
 
     @Override
-    public String getDescription() {
-        return "(" + o1.getDescription() + ") * (" + o2.getDescription() + ")";
-    }
-
-    @Override
-    public String getLatex() {
-        return "\\left(" + o1.getLatex() + "\\right)\\times\\left(" + o2.getLatex() + "\\right)";
+    boolean needBrackets(final Operand other,
+                         final Position position) {
+        return other instanceof BinaryOperator &&
+               !(other instanceof MultiplyOperator || other instanceof PowerOperator);
     }
 }

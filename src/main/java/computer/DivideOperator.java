@@ -3,7 +3,7 @@ package computer;
 public class DivideOperator extends BinaryOperator {
 
     public DivideOperator(final Operand o1, final Operand o2) {
-        super(o1, o2);
+        super(o1, o2, "/", null);
     }
 
     @Override
@@ -16,12 +16,18 @@ public class DivideOperator extends BinaryOperator {
     }
 
     @Override
-    public String getDescription() {
-        return "(" + o1.getDescription() + ") / (" + o2.getDescription() + ")";
+    public String getLatex() {
+        return "\\frac{" + o1.getLatex() + "}{" + o2.getLatex() + "}";
     }
 
     @Override
-    public String getLatex() {
-        return "\\frac{" + o1.getLatex() + "}{" + o2.getLatex() + "}";
+    boolean needBrackets(final Operand other,
+                         final Position position) {
+        if (position == Position.RIGHT ) {
+            return other instanceof BinaryOperator &&
+                    !(other instanceof PowerOperator);
+        }
+        return other instanceof BinaryOperator &&
+               !(other instanceof PowerOperator || other instanceof MultiplyOperator);
     }
 }

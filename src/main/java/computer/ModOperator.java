@@ -3,7 +3,7 @@ package computer;
 public class ModOperator extends BinaryOperator {
 
     public ModOperator(final Operand o1, final Operand o2) {
-        super(o1, o2);
+        super(o1, o2, "%", "\\mod");
     }
 
     @Override
@@ -16,12 +16,9 @@ public class ModOperator extends BinaryOperator {
     }
 
     @Override
-    public String getDescription() {
-        return "(" + o1.getDescription() + ") % (" + o2.getDescription() + ")";
-    }
-
-    @Override
-    public String getLatex() {
-        return "\\left(" + o1.getLatex() + "\\right)\\mod\\left(" + o2.getLatex() + "\\right)";
+    boolean needBrackets(final Operand other,
+                         final Position position) {
+        return other instanceof BinaryOperator &&
+               !(other instanceof PowerOperator);
     }
 }
