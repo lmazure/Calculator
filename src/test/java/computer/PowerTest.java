@@ -45,6 +45,6 @@ public class PowerTest {
         final Operand effective = new PowerOperator(n1, n2);
 
         // -- assert
-        assertEquals("(n1) ^ (n2)", effective.getDescription());
+        assertEquals("n1 ^ n2", effective.getDescription());
     }
 }

@@ -62,6 +62,6 @@ public class DivideTest {
         final Operand effective = new DivideOperator(n1, n2);
 
         // -- assert
-        assertEquals("(n1) / (n2)", effective.getDescription());
+        assertEquals("n1 / n2", effective.getDescription());
     }
 }

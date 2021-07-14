@@ -43,7 +43,6 @@ import computer.SubtractOperator;
 import computer.SumOperator;
 import computer.TanOperator;
 import computer.TanhOperator;
-import computer.VarOperator;
 
 public class Calculator {
 
@@ -80,7 +79,7 @@ public class Calculator {
         return program;
     }
 
-    private static Parser buildParser() {
+    public static Parser buildParser() {
         final Parser parser = new Parser();
         parser.addOperatorClass(AddOperator.class);
         parser.addOperatorClass(SubtractOperator.class);

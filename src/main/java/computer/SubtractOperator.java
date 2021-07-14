@@ -3,7 +3,7 @@ package computer;
 public class SubtractOperator extends BinaryOperator {
 
     public SubtractOperator(final Operand o1, final Operand o2) {
-        super(o1, o2);
+        super(o1, o2, "-", "-");
     }
 
     @Override
@@ -12,12 +12,13 @@ public class SubtractOperator extends BinaryOperator {
     }
 
     @Override
-    public String getDescription() {
-        return "(" + o1.getDescription() + ") - (" + o2.getDescription() + ")";
-    }
-
-    @Override
-    public String getLatex() {
-        return "\\left(" + o1.getLatex() + "\\right)-\\left(" + o2.getLatex() + "\\right)";
+    boolean needBrackets(final Operand other,
+                         final Position position) {
+        if (position == Position.RIGHT) {
+            return other instanceof BinaryOperator &&
+                   !(other instanceof MultiplyOperator || other instanceof DivideOperator || other instanceof PowerOperator);
+        }
+        return other instanceof BinaryOperator &&
+                (other instanceof ModOperator);
     }
 }

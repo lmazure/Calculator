@@ -31,6 +31,6 @@ import org.junit.jupiter.api.Test;
         final Operand effective = new MultiplyOperator(n1, n2);
 
         // -- assert
-        assertEquals("(n1) * (n2)", effective.getDescription());
+        assertEquals("n1 * n2", effective.getDescription());
     }
 }
