@@ -53,14 +53,14 @@ abstract public class LoopOperator implements Operand {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
         final String description = this.description +
-                                  " for " + 
-                                  name + 
-                                  " equal " + 
-                                  this.o1.getDescription() + 
-                                  " to " + 
-                                  this.o2.getDescription() + 
-                                  " of {\n" + 
-                                  this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) + 
+                                  " for " +
+                                  name +
+                                  " equal " +
+                                  this.o1.getDescription() +
+                                  " to " +
+                                  this.o2.getDescription() +
+                                  " of {\n" +
+                                  this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) +
                                   "\n}";
         this.incrementStack.discardTop();
         return description;

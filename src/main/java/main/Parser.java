@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 import computer.IncrementStack;
@@ -23,33 +24,30 @@ public class Parser {
 
     public void addOperatorClass(final Class<?> clazz) {
 
+        final String className = clazz.getSimpleName();
+        if (!className.endsWith("Operator")) {
+            throw generateException(clazz, Optional.of("class name does not end with \"Operator\""), Optional.empty());
+        }
+        final String syntax = className.substring(0, className.length() - 8).toLowerCase();
         try {
-            final String className = clazz.getSimpleName();
-            if (!className.endsWith("Operator")) {
-                throw new IllegalArgumentException("class " + clazz.getName() + " does not end with \"Operator\"");
-            }
-            final String syntax = className.substring(0, className.length() - 8).toLowerCase();
             final Constructor<?>[] constructors = clazz.getConstructors();
             if (constructors.length != 1) {
-                throw new IllegalArgumentException("class " + clazz.getName() + " is not a proper operator class (it should have one and only one constructor)");
+                throw generateException(clazz, Optional.of("it should have one and only one constructor"), Optional.empty());
             }
             final Constructor<?> constructor = constructors[0];
             final Class<?>[] parameterTypes = constructor.getParameterTypes();
             final int parameterCount = parameterTypes.length;
-            if (parameterCount == 0) {
-                throw new IllegalArgumentException("class " + clazz.getName() + " is not a proper operator class (its constructor has no parameter)");
-            }
-            final boolean lastParameterIsIncrementStack = parameterTypes[parameterCount - 1].equals(IncrementStack.class);
+            final boolean lastParameterIsIncrementStack = (parameterCount > 0 ) && parameterTypes[parameterCount - 1].equals(IncrementStack.class);
             for (int i = 0 ; i < parameterCount ; i++) {
                 if (!parameterTypes[i].equals(Operand.class) && ((i != parameterCount - 1) || !lastParameterIsIncrementStack)) {
-                    throw new IllegalArgumentException("class " + clazz.getName() + " is not a proper operator class (its constructor should have Operand parameter, except for the last that can be IncrementStack)");
+                    throw generateException(clazz, Optional.of("its constructor should have Operand parameter, except for the last that can be IncrementStack"), Optional.empty());
                 }
             }
             final OperatorClassRecord classRecord = new OperatorClassRecord(parameterCount - (lastParameterIsIncrementStack ? 1 : 0),
                                                                             buildConstructorCall(constructor, parameterCount, lastParameterIsIncrementStack));
             this.operators.put(syntax, classRecord);
-        } catch (final SecurityException | IllegalArgumentException e) {
-            throw new IllegalArgumentException("class " + clazz.getName() + " is not a proper operator class", e);
+        } catch (final SecurityException e) {
+            throw generateException(clazz, Optional.empty(), Optional.of(e));
         }
     }
 
@@ -63,59 +61,78 @@ public class Parser {
                 try {
                     return (Operand)constructor.newInstance(s);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 2: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], s);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 3: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], o[1], s);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 4: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], o[1], o[2], s);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             default:
-                throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class (its contructor has too many parameters");
+                throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
             }
-        }else {
+        } else {
             switch (parameterCount) {
+            case 0: return (final Operand[] o, final IncrementStack s) -> {
+                try {
+                    return (Operand)constructor.newInstance();
+                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+                }};
             case 1: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0]);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 2: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], o[1]);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 3: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], o[1], o[2]);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             case 4: return (final Operand[] o, final IncrementStack s) -> {
                 try {
                     return (Operand)constructor.newInstance(o[0], o[1], o[2], o[4]);
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class", e);
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
             default:
-                throw new IllegalArgumentException("class " + constructor.getDeclaringClass().getName() + " is not a proper operator class (its contructor has too many parameters");
+                throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
             }
         }
+    }
+
+    private IllegalArgumentException generateException(final Class<?> clazz,
+                                                       final Optional<String> message,
+                                                       final Optional<Exception> e) {
+        String text = "class " + clazz.getName() + " is not a proper operator class";
+        if (message.isPresent()) {
+            text += " (" + message.get() + ")";
+        }
+        if (e.isPresent()) {
+            return new IllegalArgumentException(text, e.get());
+        }
+        return new IllegalArgumentException(text);
     }
 
     public Operand parse(final List<String> expression) {

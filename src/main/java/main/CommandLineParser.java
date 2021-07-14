@@ -11,11 +11,13 @@ public class CommandLineParser {
 
     private final boolean displayInBrowser;
     private final Optional<String> svgFileName;
+    private final Optional<Long> randomSeed;
 
     public CommandLineParser(final String[] args) {
 
         boolean displayInBrowserTempo = false;
         Optional<String> svgFileNameTempo = Optional.empty();
+        Optional<Long> randomSeedTempo = Optional.empty();
 
         int i = 0;
         while (i < args.length ) {
@@ -38,6 +40,16 @@ public class CommandLineParser {
                 i += 2;
                 break;
             }
+            if (args[i].equals("-s")) {
+                if (i == (args.length - 1)) {
+                    System.err.println("missing seed");
+                    printHelp(System.err);
+                    System.exit(1);
+                }
+                randomSeedTempo = Optional.of(Long.parseLong(args[i+1]));
+                i += 2;
+                break;
+            }
             System.err.println("unexpected argument: " + args[i]);
             printHelp(System.err);
             System.exit(1);
@@ -45,6 +57,7 @@ public class CommandLineParser {
 
         this.displayInBrowser = displayInBrowserTempo;
         this.svgFileName = svgFileNameTempo;
+        this.randomSeed = randomSeedTempo;
     }
 
     /**
@@ -62,10 +75,19 @@ public class CommandLineParser {
         return this.svgFileName;
     }
 
+    /**
+     * @return seed for random numbers<br>
+     * empty if seed has been defined
+     */
+    public Optional<Long> getRandomSeed() {
+        return this.randomSeed;
+    }
+
     static private void printHelp(final PrintStream ps) {
         ps.println("options:");
         ps.println("-h        display this help");
         ps.println("-b        display the expression in a Browser");
         ps.println("-f <file> generate a SVG file of the expression");
+        ps.println("-s <seed> set the (integer) seed of random numbers");
     }
 }
