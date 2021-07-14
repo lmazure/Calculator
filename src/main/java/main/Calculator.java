@@ -35,6 +35,7 @@ import computer.MultiplyOperator;
 import computer.Operand;
 import computer.PowerOperator;
 import computer.ProductOperator;
+import computer.RandOperator;
 import computer.RoundOperator;
 import computer.SinOperator;
 import computer.SinhOperator;
@@ -49,7 +50,7 @@ public class Calculator {
     public static void main(final String[] args) {
         final CommandLineParser commandLineParser = new CommandLineParser(args);
         final LinkedList<String> expression = readExpression();
-        final Parser parser = buildParser();
+        final Parser parser = buildParser(commandLineParser);
         final Operand o = parser.parse(expression);
         printOperand(o);
         if (commandLineParser.getDisplayInBrowser()) {
@@ -79,7 +80,7 @@ public class Calculator {
         return program;
     }
 
-    public static Parser buildParser() {
+    public static Parser buildParser(final CommandLineParser commandLineParser) {
         final Parser parser = new Parser();
         parser.addOperatorClass(AddOperator.class);
         parser.addOperatorClass(SubtractOperator.class);
@@ -105,6 +106,10 @@ public class Calculator {
         parser.addOperatorClass(RoundOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
+        parser.addOperatorClass(RandOperator.class);
+        if (commandLineParser.getRandomSeed().isPresent()) {
+            RandOperator.setSeed(commandLineParser.getRandomSeed().get());
+        }
         parser.addOperatorClass(SumOperator.class);
         parser.addOperatorClass(ProductOperator.class);
         return parser;

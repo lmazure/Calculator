@@ -31,7 +31,7 @@ public abstract class BinaryOperator implements Operand {
                this.latex +
                (needBrackets(o2, Position.RIGHT) ? ("\\left(" + o2.getLatex() + "\\right)") :  o2.getLatex());
     }
-    
+
     abstract boolean needBrackets(final Operand other,
                                   final Position position);
 }

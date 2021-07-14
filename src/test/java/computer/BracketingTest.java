@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import main.Calculator;
+import main.CommandLineParser;
 import main.Parser;
 
 public class BracketingTest {
@@ -128,11 +129,11 @@ public class BracketingTest {
         "1|2|power|3|divide,1 ^ 2 / 3",
         "1|2|power|3|mod,1 ^ 2 % 3",
         "1|2|power|3|power,(1 ^ 2) ^ 3",
-        }) 
+        })
     void check(final String program,
                final String expectedDescription) {
         final List<String> expression = Arrays.asList(program.split("\\|"));
-        final Parser parser = Calculator.buildParser();
+        final Parser parser = Calculator.buildParser(new CommandLineParser(new String[0]));
         final Operand o = parser.parse(expression);
         assertEquals(expectedDescription, o.getDescription());
     }
