@@ -27,12 +27,14 @@ import computer.CeilOperator;
 import computer.CosOperator;
 import computer.CoshOperator;
 import computer.DivideOperator;
+import computer.EOperator;
 import computer.ExpOperator;
 import computer.FloorOperator;
 import computer.LnOperator;
 import computer.ModOperator;
 import computer.MultiplyOperator;
 import computer.Operand;
+import computer.PiOperator;
 import computer.PowerOperator;
 import computer.ProductOperator;
 import computer.RandOperator;
@@ -49,8 +51,20 @@ public class Calculator {
 
     public static void main(final String[] args) {
         final CommandLineParser commandLineParser = new CommandLineParser(args);
-        final LinkedList<String> expression = readExpression();
         final Parser parser = buildParser(commandLineParser);
+        if (commandLineParser.getDisplayExamples()) {
+            for (Formula formula: FormulaRepository.getFormulas()) {
+                for (String s: formula.getExpression()) {
+                    System.out.println(s);
+                }
+                final Operand example = parser.parse(formula.getExpression());
+                System.out.println(example.getDescription());
+                System.out.println(example.getValue());
+                launchCodecogs(example);
+            }
+            System.out.println("-----------------------------------");
+        }
+        final LinkedList<String> expression = readExpression();
         final Operand o = parser.parse(expression);
         printOperand(o);
         if (commandLineParser.getDisplayInBrowser()) {
@@ -59,6 +73,7 @@ public class Calculator {
         if (commandLineParser.getSvgFileName().isPresent()) {
             generateSvgFile(o, commandLineParser.getSvgFileName().get());
         }
+        
     }
 
     private static LinkedList<String> readExpression() {
@@ -110,6 +125,8 @@ public class Calculator {
         if (commandLineParser.getRandomSeed().isPresent()) {
             RandOperator.setSeed(commandLineParser.getRandomSeed().get());
         }
+        parser.addOperatorClass(EOperator.class);
+        parser.addOperatorClass(PiOperator.class);
         parser.addOperatorClass(SumOperator.class);
         parser.addOperatorClass(ProductOperator.class);
         return parser;

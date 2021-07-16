@@ -10,12 +10,14 @@ import java.util.Optional;
 public class CommandLineParser {
 
     private final boolean displayInBrowser;
+    private final boolean displayExamples;
     private final Optional<String> svgFileName;
     private final Optional<Long> randomSeed;
 
     public CommandLineParser(final String[] args) {
 
         boolean displayInBrowserTempo = false;
+        boolean displayExamplesTempo = false;
         Optional<String> svgFileNameTempo = Optional.empty();
         Optional<Long> randomSeedTempo = Optional.empty();
 
@@ -24,6 +26,11 @@ public class CommandLineParser {
             if (args[i].equals("-h")) {
                 printHelp(System.out);
                 System.exit(0);
+            }
+            if (args[i].equals("-x")) {
+                displayExamplesTempo = true;
+                i++;
+                break;
             }
             if (args[i].equals("-b")) {
                 displayInBrowserTempo = true;
@@ -56,6 +63,7 @@ public class CommandLineParser {
         }
 
         this.displayInBrowser = displayInBrowserTempo;
+        this.displayExamples = displayExamplesTempo;
         this.svgFileName = svgFileNameTempo;
         this.randomSeed = randomSeedTempo;
     }
@@ -65,6 +73,13 @@ public class CommandLineParser {
      */
     public boolean getDisplayInBrowser() {
         return this.displayInBrowser;
+    }
+
+    /**
+     * @return should the examples be displayed?
+     */
+    public boolean getDisplayExamples() {
+        return this.displayExamples;
     }
 
     /**
