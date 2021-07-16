@@ -70,7 +70,7 @@ abstract public class LoopOperator implements Operand {
     public String getLatex() {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
-        final String latex = "\\" + this.latex+ "_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" + this.o3.getLatex();
+        final String latex = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" + this.o3.getLatex();
         this.incrementStack.discardTop();
         return latex;
     }
