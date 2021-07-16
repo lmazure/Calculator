@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 
+import computer.AbsOperator;
 import computer.AcosOperator;
 import computer.AcoshOperator;
 import computer.AddOperator;
@@ -121,6 +122,7 @@ public class Calculator {
         parser.addOperatorClass(RoundOperator.class);
         parser.addOperatorClass(CeilOperator.class);
         parser.addOperatorClass(FloorOperator.class);
+        parser.addOperatorClass(AbsOperator.class);
         parser.addOperatorClass(RandOperator.class);
         if (commandLineParser.getRandomSeed().isPresent()) {
             RandOperator.setSeed(commandLineParser.getRandomSeed().get());
