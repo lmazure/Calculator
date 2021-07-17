@@ -15,7 +15,7 @@ public class FormulaRepository {
                                          "rand", "2", "power",
                                          "add", "sqrt", "floor", "subtract",
                                          "sum", "25000000", "divide"),
-            new Formula(Math.PI , 1e-3d, "1", "10000000",
+            new Formula(Math.PI , 1e-6d, "1", "10000000",
                                          "1", "var 0", "2", "power", "divide",
                                          "sum", "6", "multiply", "sqrt")
             });
