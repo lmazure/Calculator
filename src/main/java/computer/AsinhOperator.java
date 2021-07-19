@@ -6,7 +6,7 @@ public class AsinhOperator extends SimpleBracketedUnaryOperator {
         super(o1, AsinhOperator::asinh, "arcsinh");
     }
 
-    private static Double asinh(final Double value) {
+    private static double asinh(final double value) {
         return Math.log(value + Math.sqrt(value * value + 1));
     }
 }

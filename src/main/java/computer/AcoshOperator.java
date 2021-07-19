@@ -6,7 +6,7 @@ public class AcoshOperator extends SimpleBracketedUnaryOperator {
         super(o1, AcoshOperator::acosh, "arccosh");
     }
 
-    private static Double acosh(final Double value) {
+    private static double acosh(final double value) {
         return Math.log(value + Math.sqrt(value * value - 1));
     }
 }

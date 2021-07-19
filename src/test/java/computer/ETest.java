@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ETest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -19,6 +20,7 @@ public class ETest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -28,5 +30,18 @@ public class ETest {
 
         // -- assert
         assertEquals("e", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+
+        // -- act
+        final EOperator effective = new EOperator();
+
+        // -- assert
+        assertEquals("e", effective.getLatex());
     }
 }

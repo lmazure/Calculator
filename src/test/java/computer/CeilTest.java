@@ -18,6 +18,7 @@ public class CeilTest {
         "-1.2,-1.0,negative just above an integer",
         "-1.9,-1.0,negative just below an integer",
         })
+    @SuppressWarnings("static-method")
     void checkValue(final String input,
                     final String expectedResult,
                     final String description) {
@@ -36,6 +37,7 @@ public class CeilTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -46,5 +48,19 @@ public class CeilTest {
 
         // -- assert
         assertEquals("⌈n1⌉", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new CeilOperator(n1);
+
+        // -- assert
+        assertEquals("\\lceil{n1}\\rceil", effective.getLatex());
     }
 }

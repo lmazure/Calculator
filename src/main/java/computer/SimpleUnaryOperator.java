@@ -20,11 +20,11 @@ abstract class SimpleUnaryOperator extends UnaryOperator {
 
     @Override
     public double getValue() {
-        return this.function.apply(o1.getValue());
+        return this.function.apply(Double.valueOf(this.o1.getValue())).doubleValue();
     }
 
     @Override
     public String getDescription() {
-        return this.prefix + o1.getDescription() + this.suffix;
+        return this.prefix + this.o1.getDescription() + this.suffix;
     }
 }

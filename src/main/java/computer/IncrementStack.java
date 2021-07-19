@@ -5,10 +5,10 @@ import java.util.LinkedList;
 public class IncrementStack {
 
     private final LinkedList<Integer> stack = new LinkedList<>();
-    private final int MAX_LEVEL = 10;
+    private static final int MAX_LEVEL = 10;
 
     public void push(final int value) {
-        if (stack.size() == MAX_LEVEL) {
+        if (this.stack.size() == MAX_LEVEL) {
             throw new TooManyLevelsException("Too many levels (" + (MAX_LEVEL + 1) + ") of nested loops");
         }
         this.stack.push(Integer.valueOf(value));
@@ -19,14 +19,14 @@ public class IncrementStack {
     }
 
     public int getValue(final int level) {
-        return stack.get(level);
+        return this.stack.get(level).intValue();
     }
 
-    public String getName(final int level) {
+    public static String getName(final int level) {
         return ""+ (char)('i' + level);
     }
 
     public String getNameOfTop() {
-        return getName(stack.size());
+        return getName(this.stack.size());
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class PiTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -19,6 +20,7 @@ public class PiTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -28,4 +30,18 @@ public class PiTest {
 
         // -- assert
         assertEquals("π", effective.getDescription());
-    }}
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+
+        // -- act
+        final PiOperator effective = new PiOperator();
+
+        // -- assert
+        assertEquals("\\pi", effective.getLatex());
+    }
+}

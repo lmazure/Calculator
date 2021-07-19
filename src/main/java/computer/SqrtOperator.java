@@ -8,6 +8,6 @@ public class SqrtOperator extends SimpleBracketedUnaryOperator {
 
     @Override
     public String getLatex() {
-        return "\\sqrt{" + o1.getLatex() + "}";
+        return "\\sqrt{" + this.o1.getLatex() + "}";
     }
 }

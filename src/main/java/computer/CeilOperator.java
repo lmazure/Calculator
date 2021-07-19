@@ -8,6 +8,6 @@ public class CeilOperator extends SimpleUnaryOperator {
 
     @Override
     public String getLatex() {
-        return "\\lceil{" + o1.getLatex() + "}\\rceil";
+        return "\\lceil{" + this.o1.getLatex() + "}\\rceil";
     }
 }

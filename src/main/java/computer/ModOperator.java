@@ -8,11 +8,11 @@ public class ModOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
-        final double d = o1.getValue() / o2.getValue();
+        final double d = this.o1.getValue() / this.o2.getValue();
         if (!Double.isFinite(d)) {
             throw new ArithmeticException("Modulo zero");
         }
-        return (d - (int)d) * o2.getValue();
+        return (d - (int)d) * this.o2.getValue();
     }
 
     @Override

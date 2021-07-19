@@ -18,6 +18,17 @@ public class BracketingTest {
     @CsvSource({
         "1|sin,sin(1)",
 
+        "1|exp,e^1",
+        "pi|exp,e^π",
+        "1|sin|exp,e^sin(1)",
+        "1|exp|exp,e^(e^1)",
+        "1|2|add|exp,e^(1 + 2)",
+        "1|2|subtract|exp,e^(1 - 2)",
+        "1|2|multiply|exp,e^(1 * 2)",
+        "1|2|divide|exp,e^(1 / 2)",
+        "1|2|mod|exp,e^(1 % 2)",
+        "1|2|power|exp,e^(1 ^ 2)",
+
         "1|2|add,1 + 2",
         "1|2|subtract,1 - 2",
         "1|2|multiply,1 * 2",
@@ -130,6 +141,7 @@ public class BracketingTest {
         "1|2|power|3|mod,1 ^ 2 % 3",
         "1|2|power|3|power,(1 ^ 2) ^ 3",
         })
+    @SuppressWarnings("static-method")
     void check(final String program,
                final String expectedDescription) {
         final List<String> expression = Arrays.asList(program.split("\\|"));

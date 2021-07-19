@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ExpTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -20,6 +21,7 @@ public class ExpTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -29,6 +31,20 @@ public class ExpTest {
         final Operand effective = new ExpOperator(n1);
 
         // -- assert
-        assertEquals("e^(n1)", effective.getDescription());
+        assertEquals("e^n1", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new ExpOperator(n1);
+
+        // -- assert
+        assertEquals("e^n1", effective.getLatex());
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class AtanhTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -22,6 +23,7 @@ public class AtanhTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -32,5 +34,19 @@ public class AtanhTest {
 
         // -- assert
         assertEquals("arctanh(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(0.3d, "n1");
+
+        // -- act
+        final Operand effective = new AtanhOperator(n1);
+
+        // -- assert
+        assertEquals("arctanh(n1)", effective.getLatex());
     }
 }

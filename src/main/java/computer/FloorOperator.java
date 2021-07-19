@@ -8,7 +8,7 @@ public class FloorOperator extends SimpleUnaryOperator {
 
     @Override
     public String getLatex() {
-        return "\\lfloor{" + o1.getLatex() + "}\\rfloor";
+        return "\\lfloor{" + this.o1.getLatex() + "}\\rfloor";
     }
 
 }

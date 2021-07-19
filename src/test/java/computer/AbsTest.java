@@ -14,6 +14,7 @@ public class AbsTest {
         "0.0,0.0,zero",
         "-1.3,1.3,negative",
         })
+    @SuppressWarnings("static-method")
     void checkValue(final String input,
                     final String expectedResult,
                     final String description) {
@@ -32,6 +33,7 @@ public class AbsTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -42,4 +44,19 @@ public class AbsTest {
 
         // -- assert
         assertEquals("|n1|", effective.getDescription());
-    }}
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new AbsOperator(n1);
+
+        // -- assert
+        assertEquals("\\abs*{n1}", effective.getLatex());
+    }
+}

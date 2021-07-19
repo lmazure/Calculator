@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class AsinTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -21,6 +22,7 @@ public class AsinTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -31,5 +33,19 @@ public class AsinTest {
 
         // -- assert
         assertEquals("arcsin(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(0.3d, "n1");
+
+        // -- act
+        final Operand effective = new AsinOperator(n1);
+
+        // -- assert
+        assertEquals("arcsin(n1)", effective.getLatex());
     }
 }

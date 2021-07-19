@@ -8,7 +8,7 @@ public class DivideOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
-        final double result =  o1.getValue() / o2.getValue();
+        final double result =  this.o1.getValue() / this.o2.getValue();
         if (!Double.isFinite(result)) {
             throw new ArithmeticException("Division by zero");
         }
@@ -17,7 +17,7 @@ public class DivideOperator extends BinaryOperator {
 
     @Override
     public String getLatex() {
-        return "\\frac{" + o1.getLatex() + "}{" + o2.getLatex() + "}";
+        return "\\frac{" + this.o1.getLatex() + "}{" + this.o2.getLatex() + "}";
     }
 
     @Override

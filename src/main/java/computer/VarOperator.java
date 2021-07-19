@@ -13,16 +13,16 @@ public class VarOperator implements Operand {
 
     @Override
     public double getValue() {
-        return this.incrementStack.getValue(level);
+        return this.incrementStack.getValue(this.level);
     }
 
     @Override
     public String getDescription() {
-        return this.incrementStack.getName(level);
+        return IncrementStack.getName(this.level);
     }
 
     @Override
     public String getLatex() {
-        return this.incrementStack.getName(level);
+        return IncrementStack.getName(this.level);
     }
 }

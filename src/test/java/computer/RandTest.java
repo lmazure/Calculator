@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 public class RandTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
-        RandOperator.setSeed(0);;
+        RandOperator.setSeed(0);
 
         // -- act
         final RandOperator effective = new RandOperator();
@@ -20,6 +21,7 @@ public class RandTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -29,5 +31,18 @@ public class RandTest {
 
         // -- assert
         assertEquals("rand()", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+
+        // -- act
+        final RandOperator effective = new RandOperator();
+
+        // -- assert
+        assertEquals("rand()", effective.getLatex());
     }
 }

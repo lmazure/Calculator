@@ -18,14 +18,14 @@ public class Formula {
     }
 
     public List<String> getExpression() {
-        return expression;
+        return this.expression;
     }
 
     public double getResult() {
-        return result;
+        return this.result;
     }
 
     public double getPrecision() {
-        return precision;
+        return this.precision;
     }
 }

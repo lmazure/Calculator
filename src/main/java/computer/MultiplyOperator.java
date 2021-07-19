@@ -8,7 +8,7 @@ public class MultiplyOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
-        return o1.getValue() * o2.getValue();
+        return this.o1.getValue() * this.o2.getValue();
     }
 
     @Override

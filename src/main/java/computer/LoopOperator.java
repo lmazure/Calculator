@@ -42,7 +42,7 @@ abstract public class LoopOperator implements Operand {
         double result = this.initialValue;
         for (int i = min ; i <= max; i++) {
             this.incrementStack.push(i);
-            result = operator.applyAsDouble(result, this.o3.getValue());
+            result = this.operator.applyAsDouble(result, this.o3.getValue());
             this.incrementStack.discardTop();
         }
         return result;
@@ -52,26 +52,26 @@ abstract public class LoopOperator implements Operand {
     public String getDescription() {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
-        final String description = this.description +
-                                  " for " +
-                                  name +
-                                  " equal " +
-                                  this.o1.getDescription() +
-                                  " to " +
-                                  this.o2.getDescription() +
-                                  " of {\n" +
-                                  this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) +
-                                  "\n}";
+        final String desc = this.description +
+                            " for " +
+                            name +
+                            " equal " +
+                            this.o1.getDescription() +
+                            " to " +
+                            this.o2.getDescription() +
+                            " of {\n" +
+                            this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) +
+                            "\n}";
         this.incrementStack.discardTop();
-        return description;
+        return desc;
     }
 
     @Override
     public String getLatex() {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
-        final String latex = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" + this.o3.getLatex();
+        final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" + this.o3.getLatex();
         this.incrementStack.discardTop();
-        return latex;
+        return lat;
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class SumTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValueForIntegerMixMax() {
 
         // -- arrange
@@ -23,6 +24,7 @@ public class SumTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValueForFloatMixMax() {
 
         // -- arrange
@@ -39,6 +41,7 @@ public class SumTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValueForSummedVariable() {
 
         // -- arrange
@@ -55,6 +58,7 @@ public class SumTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -71,6 +75,7 @@ public class SumTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescriptionOfNestedSums() {
 
         // -- arrange
@@ -87,5 +92,22 @@ public class SumTest {
 
         // -- assert
         assertEquals("sum for i equal n1 to n2 of {\n    sum for j equal n3 to n4 of {\n        j\n    }\n}", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final IncrementStack incrementStack = new IncrementStack();
+        final Number n1 = new Number(-2.d, "n1");
+        final Number n2 = new Number(7.d, "n2");
+        final VarOperator n3 = new VarOperator(0, incrementStack);
+
+        // -- act
+        final Operand effective = new SumOperator(n1, n2, n3, incrementStack);
+
+        // -- assert
+        assertEquals("\\sum\\limits_{i=n1}^{i=n2}i", effective.getLatex());
     }
 }

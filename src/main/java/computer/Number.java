@@ -4,17 +4,19 @@ public class Number implements Operand {
 
     private double number;
     private String name;
-    private final static Double EPSILON = 0.000001d;
+    private final static double EPSILON = 0.000001d;
 
     public Number(final double number, final String name) {
         this.number = number;
         this.name = name;
     }
 
+    @Override
     public double getValue() {
         return this.number;
     }
 
+    @Override
     public String getDescription() {
         return this.name;
     }

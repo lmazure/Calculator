@@ -170,7 +170,7 @@ public class Calculator {
         parser.addOperatorClass(AbsOperator.class);
         parser.addOperatorClass(RandOperator.class);
         if (commandLineParser.getRandomSeed().isPresent()) {
-            RandOperator.setSeed(commandLineParser.getRandomSeed().get());
+            RandOperator.setSeed(commandLineParser.getRandomSeed().get().longValue());
         }
         parser.addOperatorClass(EOperator.class);
         parser.addOperatorClass(PiOperator.class);
@@ -205,12 +205,12 @@ public class Calculator {
         try {
             final HttpURLConnection connection = (HttpURLConnection) getUrl(o).openConnection();
             connection.setRequestMethod("GET");
-            final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
+            try (final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
             }
-            in.close();
             connection.disconnect();
         } catch (final IOException e) {
             e.printStackTrace();
