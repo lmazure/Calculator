@@ -9,9 +9,10 @@ public class AddOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
-        return o1.getValue() + o2.getValue();
+        return this.o1.getValue() + this.o2.getValue();
     }
 
+    @Override
     boolean needBrackets(final Operand other,
                          final Position position) {
         return other instanceof ModOperator;

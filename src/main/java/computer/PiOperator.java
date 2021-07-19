@@ -1,22 +1,8 @@
 package computer;
 
-public class PiOperator implements Operand {
+public class PiOperator extends ConstantOperator {
 
     public PiOperator() {
-    }
-
-    @Override
-    public double getValue() {
-        return Math.PI;
-    }
-
-    @Override
-    public String getDescription() {
-        return "π";
-    }
-
-    @Override
-    public String getLatex() {
-        return "\\pi";
+        super(Math.PI, "π", "\\pi");
     }
 }

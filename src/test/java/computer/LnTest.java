@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class LnTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -20,6 +21,7 @@ public class LnTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -30,5 +32,19 @@ public class LnTest {
 
         // -- assert
         assertEquals("ln(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new LnOperator(n1);
+
+        // -- assert
+        assertEquals("ln(n1)", effective.getLatex());
     }
 }

@@ -9,6 +9,6 @@ public class AbsOperator extends SimpleUnaryOperator {
 
     @Override
     public String getLatex() {
-        return "\\abs*{" + o1.getLatex() + "}";
+        return "\\abs*{" + this.o1.getLatex() + "}";
     }
 }

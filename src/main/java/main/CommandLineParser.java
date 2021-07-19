@@ -53,7 +53,13 @@ public class CommandLineParser {
                     printHelp(System.err);
                     System.exit(1);
                 }
-                randomSeedTempo = Optional.of(Long.parseLong(args[i+1]));
+                try {
+                    randomSeedTempo = Optional.of(Long.valueOf(args[i+1]));
+                } catch (@SuppressWarnings("unused") final NumberFormatException e) {
+                    System.err.println("invalid seed value: " + args[i+1]);
+                    printHelp(System.err);
+                    System.exit(1);
+                }
                 i += 2;
                 break;
             }

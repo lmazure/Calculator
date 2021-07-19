@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class TanhTest extends AddTest {
+public class TanhTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -21,6 +22,7 @@ public class TanhTest extends AddTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -31,5 +33,19 @@ public class TanhTest extends AddTest {
 
         // -- assert
         assertEquals("tanh(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new TanhOperator(n1);
+
+        // -- assert
+        assertEquals("tanh(n1)", effective.getLatex());
     }
 }

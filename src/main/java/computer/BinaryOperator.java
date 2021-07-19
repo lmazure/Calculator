@@ -6,7 +6,7 @@ public abstract class BinaryOperator implements Operand {
     protected final Operand o2;
     private final String description;
     private final String latex;
-    protected enum Position { LEFT, RIGHT };
+    protected enum Position { LEFT, RIGHT }
 
     protected BinaryOperator(final Operand o1,
                              final Operand o2,
@@ -20,16 +20,16 @@ public abstract class BinaryOperator implements Operand {
 
     @Override
     public String getDescription() {
-        return (needBrackets(o1, Position.LEFT) ? ("(" + o1.getDescription() + ")") :  o1.getDescription()) +
+        return (needBrackets(this.o1, Position.LEFT) ? ("(" + this.o1.getDescription() + ")") :  this.o1.getDescription()) +
                " " + this.description + " " +
-               (needBrackets(o2, Position.RIGHT) ? ("(" + o2.getDescription() + ")") :  o2.getDescription());
+               (needBrackets(this.o2, Position.RIGHT) ? ("(" + this.o2.getDescription() + ")") :  this.o2.getDescription());
     }
 
     @Override
     public String getLatex() {
-        return (needBrackets(o1, Position.LEFT) ? ("\\left(" + o1.getLatex() + "\\right)") :  o1.getLatex()) +
+        return (needBrackets(this.o1, Position.LEFT) ? ("\\left(" + this.o1.getLatex() + "\\right)") :  this.o1.getLatex()) +
                this.latex +
-               (needBrackets(o2, Position.RIGHT) ? ("\\left(" + o2.getLatex() + "\\right)") :  o2.getLatex());
+               (needBrackets(this.o2, Position.RIGHT) ? ("\\left(" + this.o2.getLatex() + "\\right)") :  this.o2.getLatex());
     }
 
     abstract boolean needBrackets(final Operand other,

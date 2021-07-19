@@ -8,7 +8,7 @@ public class PowerOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
-        final double result =  Math.pow(o1.getValue(), o2.getValue());
+        final double result =  Math.pow(this.o1.getValue(), this.o2.getValue());
         if (!Double.isFinite(result)) {
             throw new ArithmeticException("Invalid exponentiation");
         }

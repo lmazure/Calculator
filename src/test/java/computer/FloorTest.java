@@ -18,6 +18,7 @@ public class FloorTest {
         "-1.2,-2.0,negative just above an integer",
         "-1.9,-2.0,negative just below an integer",
         })
+    @SuppressWarnings("static-method")
     void checkValue(final String input,
                     final String expectedResult,
                     final String description) {
@@ -36,6 +37,7 @@ public class FloorTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -46,5 +48,19 @@ public class FloorTest {
 
         // -- assert
         assertEquals("⌊n1⌋", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new FloorOperator(n1);
+
+        // -- assert
+        assertEquals("\\lfloor{n1}\\rfloor", effective.getLatex());
     }
 }

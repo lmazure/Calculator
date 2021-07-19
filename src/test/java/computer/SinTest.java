@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class SinTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -21,6 +22,7 @@ public class SinTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -31,5 +33,19 @@ public class SinTest {
 
         // -- assert
         assertEquals("sin(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(1.3d, "n1");
+
+        // -- act
+        final Operand effective = new SinOperator(n1);
+
+        // -- assert
+        assertEquals("sin(n1)", effective.getLatex());
     }
 }

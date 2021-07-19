@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class AcosTest {
 
     @Test
+    @SuppressWarnings("static-method")
     void checkValue() {
 
         // -- arrange
@@ -21,6 +22,7 @@ public class AcosTest {
     }
 
     @Test
+    @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
@@ -31,5 +33,19 @@ public class AcosTest {
 
         // -- assert
         assertEquals("arccos(n1)", effective.getDescription());
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void checkLatex() {
+
+        // -- arrange
+        final Number n1 = new Number(0.3d, "n1");
+
+        // -- act
+        final Operand effective = new AcosOperator(n1);
+
+        // -- assert
+        assertEquals("arccos(n1)", effective.getLatex());
     }
 }

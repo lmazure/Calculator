@@ -17,7 +17,7 @@ public class Parser {
 
     private final LinkedList<Operand> stack = new LinkedList<>();
     private final IncrementStack incrementStack = new IncrementStack();
-    private final Map<String, OperatorClassRecord> operators = new HashMap<String, OperatorClassRecord>();
+    private final Map<String, OperatorClassRecord> operators = new HashMap<>();
 
     public Parser() {
     }
@@ -51,9 +51,9 @@ public class Parser {
         }
     }
 
-    private BiFunction<Operand[], IncrementStack, Operand> buildConstructorCall(final Constructor<?> constructor,
-                                                                                final int parameterCount,
-                                                                                final boolean lastParameterIsIncrementStack) {
+    private static BiFunction<Operand[], IncrementStack, Operand> buildConstructorCall(final Constructor<?> constructor,
+                                                                                       final int parameterCount,
+                                                                                       final boolean lastParameterIsIncrementStack) {
         // kludge to fix the impedance mismatch between using arrays and multiple parameters...
         if (lastParameterIsIncrementStack) {
             switch (parameterCount) {
@@ -84,47 +84,46 @@ public class Parser {
             default:
                 throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
             }
-        } else {
-            switch (parameterCount) {
-            case 0: return (final Operand[] o, final IncrementStack s) -> {
-                try {
-                    return (Operand)constructor.newInstance();
-                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
-                }};
-            case 1: return (final Operand[] o, final IncrementStack s) -> {
-                try {
-                    return (Operand)constructor.newInstance(o[0]);
-                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
-                }};
-            case 2: return (final Operand[] o, final IncrementStack s) -> {
-                try {
-                    return (Operand)constructor.newInstance(o[0], o[1]);
-                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
-                }};
-            case 3: return (final Operand[] o, final IncrementStack s) -> {
-                try {
-                    return (Operand)constructor.newInstance(o[0], o[1], o[2]);
-                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
-                }};
-            case 4: return (final Operand[] o, final IncrementStack s) -> {
-                try {
-                    return (Operand)constructor.newInstance(o[0], o[1], o[2], o[4]);
-                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
-                }};
-            default:
-                throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
-            }
+        }
+        switch (parameterCount) {
+        case 0: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance();
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        case 1: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance(o[0]);
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        case 2: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance(o[0], o[1]);
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        case 3: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance(o[0], o[1], o[2]);
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        case 4: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance(o[0], o[1], o[2], o[4]);
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        default:
+            throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
         }
     }
 
-    private IllegalArgumentException generateException(final Class<?> clazz,
-                                                       final Optional<String> message,
-                                                       final Optional<Exception> e) {
+    private static IllegalArgumentException generateException(final Class<?> clazz,
+                                                              final Optional<String> message,
+                                                              final Optional<Exception> e) {
         String text = "class " + clazz.getName() + " is not a proper operator class";
         if (message.isPresent()) {
             text += " (" + message.get() + ")";
@@ -140,31 +139,31 @@ public class Parser {
         int lineNumber = 0;
         for (final String line: expression) {
             lineNumber++;
-            if (operators.containsKey(line)) {
-                final OperatorClassRecord classRecord = operators.get(line);
+            if (this.operators.containsKey(line)) {
+                final OperatorClassRecord classRecord = this.operators.get(line);
                 final Operand[] o = new Operand[classRecord.getOperandCount()];
                 for (int i = 0; i < classRecord.getOperandCount(); i++) {
                     final int paramNumber = classRecord.getOperandCount() - i;
-                    if (stack.isEmpty()) {
+                    if (this.stack.isEmpty()) {
                         System.err.println("stack is empty when trying to get parameter number " + (i + 1) + " of operator \"" + line + "\" (line number " + lineNumber + ")");
                         System.exit(1);
                     }
                     o[paramNumber - 1] = this.stack.pop();
                 }
-                stack.push(classRecord.getConstructor().apply(o, incrementStack));
+                this.stack.push(classRecord.getConstructor().apply(o, this.incrementStack));
             } else if (line.startsWith("var ")) {
                 final int varNumber = Integer.parseInt(line.substring(4));
-                stack.push(new VarOperator(varNumber, incrementStack));
+                this.stack.push(new VarOperator(varNumber, this.incrementStack));
             } else {
                 final double value = Double.parseDouble(line);
-                stack.push(new computer.Number(value, line));
+                this.stack.push(new computer.Number(value, line));
             }
         }
-        if (stack.isEmpty()) {
+        if (this.stack.isEmpty()) {
             System.err.println("stack is empty when trying to get final result (line number " + lineNumber + ")");
             System.exit(1);
         }
-        return stack.pop();
+        return this.stack.pop();
     }
 
     public class OperatorClassRecord {
@@ -176,10 +175,10 @@ public class Parser {
             this.constructor = constructor;
         }
         public int getOperandCount() {
-            return operandCount;
+            return this.operandCount;
         }
         public BiFunction<Operand[], IncrementStack, Operand> getConstructor() {
-            return constructor;
+            return this.constructor;
         }
     }
 }
