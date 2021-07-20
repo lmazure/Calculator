@@ -70,7 +70,9 @@ abstract public class LoopOperator implements Operand {
     public String getLatex() {
         final String name = this.incrementStack.getNameOfTop();
         this.incrementStack.push(0);
-        final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" + this.o3.getLatex();
+        final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" +
+                           ((this.o3 instanceof BinaryOperator) ? "\\left(" + this.o3.getLatex() + "\\right)"
+                                                                : this.o3.getLatex());
         this.incrementStack.discardTop();
         return lat;
     }

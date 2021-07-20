@@ -20,16 +20,41 @@ public abstract class BinaryOperator implements Operand {
 
     @Override
     public String getDescription() {
-        return (needBrackets(this.o1, Position.LEFT) ? ("(" + this.o1.getDescription() + ")") :  this.o1.getDescription()) +
+        return (needBrackets(this.o1, Position.LEFT) ? ("(" + this.o1.getDescription() + ")")
+                                                     :  this.o1.getDescription()) +
                " " + this.description + " " +
-               (needBrackets(this.o2, Position.RIGHT) ? ("(" + this.o2.getDescription() + ")") :  this.o2.getDescription());
+               (needBrackets(this.o2, Position.RIGHT) ? ("(" + this.o2.getDescription() + ")")
+                                                      :  this.o2.getDescription());
     }
 
     @Override
     public String getLatex() {
-        return (needBrackets(this.o1, Position.LEFT) ? ("\\left(" + this.o1.getLatex() + "\\right)") :  this.o1.getLatex()) +
+        String leftOpening, leftClosing;
+        if (needBrackets(this.o1, Position.LEFT)) {
+            leftOpening = "\\left(";
+            leftClosing = "\\right)";
+        } else if ((this.o1 instanceof VarOperator) || (this.o1 instanceof Number)) {
+            leftOpening = "{";
+            leftClosing = "}";
+        } else {
+            leftOpening = "";
+            leftClosing = "";
+        }
+        String rightOpening, rightClosing;
+        if (needBrackets(this.o2, Position.RIGHT)) {
+            rightOpening = "\\left(";
+            rightClosing = "\\right)";
+        } else if ((this.o2 instanceof VarOperator) || (this.o2 instanceof Number)) {
+            rightOpening = "{";
+            rightClosing = "}";
+        } else {
+            rightOpening = "";
+            rightClosing = "";
+        }
+
+        return leftOpening + this.o1.getLatex() + leftClosing +
                this.latex +
-               (needBrackets(this.o2, Position.RIGHT) ? ("\\left(" + this.o2.getLatex() + "\\right)") :  this.o2.getLatex());
+               rightOpening + this.o2.getLatex() + rightClosing;
     }
 
     abstract boolean needBrackets(final Operand other,

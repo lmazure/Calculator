@@ -6,7 +6,8 @@ public class Number implements Operand {
     private String name;
     private final static double EPSILON = 0.000001d;
 
-    public Number(final double number, final String name) {
+    public Number(final double number,
+                  final String name) {
         this.number = number;
         this.name = name;
     }

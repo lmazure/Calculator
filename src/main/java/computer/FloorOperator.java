@@ -10,5 +10,4 @@ public class FloorOperator extends SimpleUnaryOperator {
     public String getLatex() {
         return "\\lfloor{" + this.o1.getLatex() + "}\\rfloor";
     }
-
 }

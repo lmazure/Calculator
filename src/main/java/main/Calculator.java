@@ -107,9 +107,7 @@ public class Calculator {
                         writer.write("</tr>\n");
                         line++;
                     }
-                    //System.out.println(example.getDescription());
-                    //System.out.println(example.getValue());
-                    //launchCodecogs(example);
+                    //System.out.println(example.getLatex());
                     writer.write("</table><br>\n");
                 }
                 writer.write("</body>\n");
