@@ -79,6 +79,6 @@ public class ModTest {
         final Operand effective = new ModOperator(n1, n2);
 
         // -- assert
-        assertEquals("n1\\modn2", effective.getLatex());
+        assertEquals("{n1}\\mod{n2}", effective.getLatex());
     }
 }
