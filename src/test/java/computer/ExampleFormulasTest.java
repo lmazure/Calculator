@@ -14,7 +14,7 @@ import main.Formula;
 import main.FormulaRepository;
 import main.Parser;
 
-public class ExampleFormulas {
+public class ExampleFormulasTest {
 
     @ParameterizedTest
     @MethodSource("getExampleFormulas")
@@ -28,10 +28,11 @@ public class ExampleFormulas {
         final Parser parser = Calculator.buildParser(new CommandLineParser(new String[0]));
 
         // -- act
-        final Operand effective = parser.parse(expression);
+        final Operand parsedExpression = parser.parse(expression);
+        final double effectiveValue = parsedExpression.getValue();
 
         // -- assert
-        assertEquals(expectedResult, effective.getValue(), precision);
+        assertEquals(expectedResult, effectiveValue, precision, "Wrong result for expression " + parsedExpression.getDescription());
      }
 
     private static Stream<Formula> getExampleFormulas() {
