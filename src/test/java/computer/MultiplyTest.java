@@ -48,6 +48,6 @@ import org.junit.jupiter.api.Test;
         final Operand effective = new MultiplyOperator(n1, n2);
 
         // -- assert
-        assertEquals("n1\\timesn2", effective.getLatex());
+        assertEquals("{n1}\\times{n2}", effective.getLatex());
     }
 }

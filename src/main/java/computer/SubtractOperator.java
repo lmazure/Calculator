@@ -18,7 +18,6 @@ public class SubtractOperator extends BinaryOperator {
             return other instanceof BinaryOperator &&
                    !(other instanceof MultiplyOperator || other instanceof DivideOperator || other instanceof PowerOperator);
         }
-        return other instanceof BinaryOperator &&
-                (other instanceof ModOperator);
+        return other instanceof ModOperator;
     }
 }
