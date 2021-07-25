@@ -14,10 +14,10 @@ public class ExpTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new ExpOperator(n1);
+        final double effectiveValue = (new ExpOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.exp(1.3d), effective.getValue(), 0.0001d);
+        assertEquals(Math.exp(1.3d), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -28,10 +28,10 @@ public class ExpTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new ExpOperator(n1);
+        final String effectiveDescription = (new ExpOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("e^n1", effective.getDescription());
+        assertEquals("e^n1", effectiveDescription);
     }
 
     @Test
@@ -42,9 +42,9 @@ public class ExpTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new ExpOperator(n1);
+        final String effectiveLatex = (new ExpOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("e^n1", effective.getLatex());
+        assertEquals("e^n1", effectiveLatex);
     }
 }

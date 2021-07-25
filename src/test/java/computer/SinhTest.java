@@ -15,10 +15,10 @@ public class SinhTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new SinhOperator(n1);
+        final double effectiveValue = (new SinhOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.sinh(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.sinh(value), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class SinhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new SinhOperator(n1);
+        final String effectiveDescription = (new SinhOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("sinh(n1)", effective.getDescription());
+        assertEquals("sinh(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +43,9 @@ public class SinhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new SinhOperator(n1);
+        final String effectiveLatex = (new SinhOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("sinh(n1)", effective.getLatex());
+        assertEquals("sinh(n1)", effectiveLatex);
     }
 }

@@ -15,10 +15,10 @@ public class CosTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new CosOperator(n1);
+        final double effectiveValue = (new CosOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.cos(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.cos(value), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class CosTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new CosOperator(n1);
+        final String effectiveDescription = (new CosOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("cos(n1)", effective.getDescription());
+        assertEquals("cos(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +43,9 @@ public class CosTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new CosOperator(n1);
+        final String effectiveLatex = (new CosOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("cos(n1)", effective.getLatex());
+        assertEquals("cos(n1)", effectiveLatex);
     }
 }

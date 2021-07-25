@@ -14,10 +14,10 @@ public class RandTest {
         RandOperator.setSeed(0);
 
         // -- act
-        final RandOperator effective = new RandOperator();
+        final double effectiveValue = (new RandOperator()).getValue();
 
         // -- assert
-        assertEquals(0.730967787376657d, effective.getValue(), 0.0001d);
+        assertEquals(0.730967787376657d, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -27,10 +27,10 @@ public class RandTest {
         // -- arrange
 
         // -- act
-        final RandOperator effective = new RandOperator();
+        final String effectiveDescription = (new RandOperator()).getDescription();
 
         // -- assert
-        assertEquals("rand()", effective.getDescription());
+        assertEquals("rand()", effectiveDescription);
     }
 
     @Test
@@ -40,9 +40,9 @@ public class RandTest {
         // -- arrange
 
         // -- act
-        final RandOperator effective = new RandOperator();
+        final String effectiveLatex = (new RandOperator()).getLatex();
 
         // -- assert
-        assertEquals("rand()", effective.getLatex());
+        assertEquals("rand()", effectiveLatex);
     }
 }

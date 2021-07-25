@@ -1,6 +1,7 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +16,43 @@ public class AsinTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new AsinOperator(n1);
+        final double effectiveValue = (new AsinOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.asin(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.asin(value), effectiveValue, 1E-10d);
+    }
+
+
+    @Test
+    @SuppressWarnings("static-method")
+    void arcsinOfValueLessThanMinusOneShoulThrowException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(-2.0d, "n1");
+
+                // -- act
+                final double effectiveValue = (new AsinOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void arcsinOfValueGreaterOneShoulThrowException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(2.0d, "n1");
+
+                // -- act
+                final double effectiveValue = (new AsinOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
     }
 
     @Test
@@ -29,10 +63,10 @@ public class AsinTest {
         final Number n1 = new Number(0.3d, "n1");
 
         // -- act
-        final Operand effective = new AsinOperator(n1);
+        final String effectiveDescription = (new AsinOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("arcsin(n1)", effective.getDescription());
+        assertEquals("arcsin(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +77,9 @@ public class AsinTest {
         final Number n1 = new Number(0.3d, "n1");
 
         // -- act
-        final Operand effective = new AsinOperator(n1);
+        final String effectiveLatex = (new AsinOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("arcsin(n1)", effective.getLatex());
+        assertEquals("arcsin(n1)", effectiveLatex);
     }
 }

@@ -15,10 +15,10 @@ public class AtanTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new AtanOperator(n1);
+        final double effectiveValue = (new AtanOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.atan(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.atan(value), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class AtanTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AtanOperator(n1);
+        final String effectiveDescription = (new AtanOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("arctan(n1)", effective.getDescription());
+        assertEquals("arctan(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +43,9 @@ public class AtanTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AtanOperator(n1);
+        final String effectiveLatex = (new AtanOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("arctan(n1)", effective.getLatex());
+        assertEquals("arctan(n1)", effectiveLatex);
     }
 }

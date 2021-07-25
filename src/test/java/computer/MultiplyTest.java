@@ -15,10 +15,10 @@ import org.junit.jupiter.api.Test;
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new MultiplyOperator(n1, n2);
+        final double effectiveValue = (new MultiplyOperator(n1, n2)).getValue();
 
         // -- assert
-        assertEquals(0.91d, effective.getValue(), 0.0001d);
+        assertEquals(0.91d, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ import org.junit.jupiter.api.Test;
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new MultiplyOperator(n1, n2);
+        final String effectiveDescription = (new MultiplyOperator(n1, n2)).getDescription();
 
         // -- assert
-        assertEquals("n1 * n2", effective.getDescription());
+        assertEquals("n1 * n2", effectiveDescription);
     }
 
     @Test
@@ -45,9 +45,9 @@ import org.junit.jupiter.api.Test;
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new MultiplyOperator(n1, n2);
+        final String effectiveLatex = (new MultiplyOperator(n1, n2)).getLatex();
 
         // -- assert
-        assertEquals("{n1}\\times{n2}", effective.getLatex());
+        assertEquals("{n1}\\times{n2}", effectiveLatex);
     }
 }

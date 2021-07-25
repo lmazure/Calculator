@@ -15,11 +15,11 @@ public class AsinhTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new AsinhOperator(n1);
+        final double effectiveValue = (new AsinhOperator(n1)).getValue();
 
         // -- assert
         // Math.asinh does not exist, so we use Math.sinh to check
-        assertEquals(value, Math.sinh(effective.getValue()), 0.0001d);
+        assertEquals(value, Math.sinh(effectiveValue), 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class AsinhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AsinhOperator(n1);
+        final String effectiveDescription = (new AsinhOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("arcsinh(n1)", effective.getDescription());
+        assertEquals("arcsinh(n1)", effectiveDescription);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class AsinhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AsinhOperator(n1);
+        final String effectiveLatex = (new AsinhOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("arcsinh(n1)", effective.getLatex());
+        assertEquals("arcsinh(n1)", effectiveLatex);
     }
 }

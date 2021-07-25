@@ -30,10 +30,10 @@ public class FloorTest {
         final Number n1 = new Number(inputValue, "n1");
 
         // -- act
-        final Operand effective = new FloorOperator(n1);
+        final double effectiveValue = (new FloorOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(expectedRes, effective.getValue(), 0.0001d, "Failure for " + description);
+        assertEquals(expectedRes, effectiveValue, 1E-10d, "Failure for " + description);
     }
 
     @Test
@@ -44,10 +44,10 @@ public class FloorTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new FloorOperator(n1);
+        final String effectiveDescription = (new FloorOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("⌊n1⌋", effective.getDescription());
+        assertEquals("⌊n1⌋", effectiveDescription);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class FloorTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new FloorOperator(n1);
+        final String effectiveLatex = (new FloorOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("\\lfloor{n1}\\rfloor", effective.getLatex());
+        assertEquals("\\lfloor{n1}\\rfloor", effectiveLatex);
     }
 }
