@@ -7,6 +7,14 @@ public class SqrtOperator extends SimpleBracketedUnaryOperator {
     }
 
     @Override
+    public double getValue() {
+        if (this.o1.getValue() < 0.0d) {
+            throw new ArithmeticException("sqrt of a negative number");
+        }
+        return Math.sqrt(this.o1.getValue());
+    }
+
+    @Override
     public String getLatex() {
         return "\\sqrt{" + this.o1.getLatex() + "}";
     }

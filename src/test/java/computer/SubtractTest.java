@@ -15,10 +15,10 @@ public class SubtractTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new SubtractOperator(n1, n2);
+        final double effectiveValue = (new SubtractOperator(n1, n2)).getValue();
 
         // -- assert
-        assertEquals(-0.4d, effective.getValue(), 0.0001d);
+        assertEquals(-0.4d, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class SubtractTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new SubtractOperator(n1, n2);
+        final String effectiveDescription = (new SubtractOperator(n1, n2)).getDescription();
 
         // -- assert
-        assertEquals("n1 - n2", effective.getDescription());
+        assertEquals("n1 - n2", effectiveDescription);
     }
 
     @Test
@@ -45,9 +45,9 @@ public class SubtractTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new SubtractOperator(n1, n2);
+        final String effectiveLatex = (new SubtractOperator(n1, n2)).getLatex();
 
         // -- assert
-        assertEquals("{n1}-{n2}", effective.getLatex());
+        assertEquals("{n1}-{n2}", effectiveLatex);
     }
 }

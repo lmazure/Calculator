@@ -15,11 +15,11 @@ public class AcoshTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new AcoshOperator(n1);
+        final double effectiveValue = (new AcoshOperator(n1)).getValue();
 
         // -- assert
         // Math.acosh does not exist, so we use Math.cosh to check
-        assertEquals(value, Math.cosh(effective.getValue()), 0.0001d);
+        assertEquals(value, Math.cosh(effectiveValue), 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class AcoshTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AcoshOperator(n1);
+        final String effectiveDescription = (new AcoshOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("arccosh(n1)", effective.getDescription());
+        assertEquals("arccosh(n1)", effectiveDescription);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class AcoshTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new AcoshOperator(n1);
+        final String effectiveLatex = (new AcoshOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("arccosh(n1)", effective.getLatex());
+        assertEquals("arccosh(n1)", effectiveLatex);
     }
 }

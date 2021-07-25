@@ -15,10 +15,10 @@ public class AddTest {
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new AddOperator(n1, n2);
+        final double effectiveValue = (new AddOperator(n1, n2)).getValue();
 
         // -- assert
-        assertEquals(2.0d, effective.getValue(), 0.0001d);
+        assertEquals(2.0d, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class AddTest {
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new AddOperator(n1, n2);
+        final String effectiveDescription = (new AddOperator(n1, n2)).getDescription();
 
         // -- assert
-        assertEquals("n1 + n2", effective.getDescription());
+        assertEquals("n1 + n2", effectiveDescription);
     }
 
     @Test
@@ -45,9 +45,9 @@ public class AddTest {
         final Number n2 = new Number(0.7d, "n2");
 
         // -- act
-        final Operand effective = new AddOperator(n1, n2);
+        final String effectiveLatex = (new AddOperator(n1, n2)).getLatex();
 
         // -- assert
-        assertEquals("{n1}+{n2}", effective.getLatex());
+        assertEquals("{n1}+{n2}", effectiveLatex);
     }
 }

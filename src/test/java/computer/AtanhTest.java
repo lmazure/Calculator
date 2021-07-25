@@ -15,11 +15,11 @@ public class AtanhTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new AtanhOperator(n1);
+        final double effectiveValue = (new AtanhOperator(n1)).getValue();
 
         // -- assert
         // Math.tanh does not exist, so we use Math.tanh to cjeck
-        assertEquals(value, Math.tanh(effective.getValue()), 0.0001d);
+        assertEquals(value, Math.tanh(effectiveValue), 1E-10d);
     }
 
     @Test
@@ -30,10 +30,10 @@ public class AtanhTest {
         final Number n1 = new Number(0.3d, "n1");
 
         // -- act
-        final Operand effective = new AtanhOperator(n1);
+        final String effectiveDescription = (new AtanhOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("arctanh(n1)", effective.getDescription());
+        assertEquals("arctanh(n1)", effectiveDescription);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class AtanhTest {
         final Number n1 = new Number(0.3d, "n1");
 
         // -- act
-        final Operand effective = new AtanhOperator(n1);
+        final String effectiveLatex = (new AtanhOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("arctanh(n1)", effective.getLatex());
+        assertEquals("arctanh(n1)", effectiveLatex);
     }
 }

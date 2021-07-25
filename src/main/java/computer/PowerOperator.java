@@ -8,6 +8,9 @@ public class PowerOperator extends BinaryOperator {
 
     @Override
     public double getValue() {
+        if ((this.o1.getValue() == 0) && (this.o2.getValue() == 0)) {
+            throw new ArithmeticException("0 power 0 is undefined");
+        }
         final double result =  Math.pow(this.o1.getValue(), this.o2.getValue());
         if (!Double.isFinite(result)) {
             throw new ArithmeticException("Invalid exponentiation");

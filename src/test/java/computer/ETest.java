@@ -13,10 +13,10 @@ public class ETest {
         // -- arrange
 
         // -- act
-        final EOperator effective = new EOperator();
+        final double effectiveValue = (new EOperator()).getValue();
 
         // -- assert
-        assertEquals(2.718281828459045d, effective.getValue(), 0.0001d);
+        assertEquals(Math.E, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -26,10 +26,10 @@ public class ETest {
         // -- arrange
 
         // -- act
-        final EOperator effective = new EOperator();
+        final String effectiveDescription = (new EOperator()).getDescription();
 
         // -- assert
-        assertEquals("e", effective.getDescription());
+        assertEquals("e", effectiveDescription);
     }
 
     @Test
@@ -39,9 +39,9 @@ public class ETest {
         // -- arrange
 
         // -- act
-        final EOperator effective = new EOperator();
+        final String effectiveLatex = (new EOperator()).getLatex();
 
         // -- assert
-        assertEquals("e", effective.getLatex());
+        assertEquals("e", effectiveLatex);
     }
 }

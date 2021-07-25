@@ -15,15 +15,15 @@ public class DivideTest {
         final Number n2 = new Number(0.3d, "n2");
 
         // -- act
-        final Operand effective = new DivideOperator(n1, n2);
+        final double effectiveValue = (new DivideOperator(n1, n2)).getValue();
 
         // -- assert
-        assertEquals(6.66666666666666666667d, effective.getValue(), 0.0001d);
+        assertEquals(6.66666666666666666667d, effectiveValue, 1E-10d);
     }
 
     @Test
     @SuppressWarnings("static-method")
-    void checkDivisionByZero() {
+    void divisionByZeroShouldGenerateException() {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
@@ -40,7 +40,7 @@ public class DivideTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void checkZeroDividedByZero() {
+    void zeroDividedByZeroShouldGenerateException() {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
@@ -63,10 +63,10 @@ public class DivideTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new DivideOperator(n1, n2);
+        final String effectiveDescription = (new DivideOperator(n1, n2)).getDescription();
 
         // -- assert
-        assertEquals("n1 / n2", effective.getDescription());
+        assertEquals("n1 / n2", effectiveDescription);
     }
 
     @Test
@@ -77,9 +77,9 @@ public class DivideTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new DivideOperator(n1, n2);
+        final String effectiveLatex = (new DivideOperator(n1, n2)).getLatex();
 
         // -- assert
-        assertEquals("\\frac{n1}{n2}", effective.getLatex());
+        assertEquals("\\frac{n1}{n2}", effectiveLatex);
     }
 }

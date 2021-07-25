@@ -1,6 +1,7 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,26 @@ public class SqrtTest {
         final Number n1 = new Number(1.69d, "n1");
 
         // -- act
-        final Operand effective = new SqrtOperator(n1);
+        final double effectiveValue = (new SqrtOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(1.3d, effective.getValue(), 0.0001d);
+        assertEquals(1.3d, effectiveValue, 1E-10d);
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void negativeValueShouldGenerateException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(-1.69d, "n1");
+
+                // -- act
+                final double effectiveValue = (new SqrtOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
     }
 
     @Test
@@ -28,10 +45,10 @@ public class SqrtTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new SqrtOperator(n1);
+        final String effectiveDescription = (new SqrtOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("sqrt(n1)", effective.getDescription());
+        assertEquals("sqrt(n1)", effectiveDescription);
     }
 
     @Test
@@ -42,9 +59,9 @@ public class SqrtTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new SqrtOperator(n1);
+        final String effectiveLatex = (new SqrtOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("\\sqrt{n1}", effective.getLatex());
+        assertEquals("\\sqrt{n1}", effectiveLatex);
     }
 }

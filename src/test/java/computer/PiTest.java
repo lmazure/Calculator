@@ -13,10 +13,10 @@ public class PiTest {
         // -- arrange
 
         // -- act
-        final PiOperator effective = new PiOperator();
+        final double effectiveValue = (new PiOperator()).getValue();
 
         // -- assert
-        assertEquals(3.141592653589793d, effective.getValue(), 0.0001d);
+        assertEquals(Math.PI, effectiveValue, 1E-10d);
     }
 
     @Test
@@ -26,10 +26,10 @@ public class PiTest {
         // -- arrange
 
         // -- act
-        final PiOperator effective = new PiOperator();
+        final String effectiveDescription = (new PiOperator()).getDescription();
 
         // -- assert
-        assertEquals("π", effective.getDescription());
+        assertEquals("π", effectiveDescription);
     }
 
     @Test
@@ -39,9 +39,9 @@ public class PiTest {
         // -- arrange
 
         // -- act
-        final PiOperator effective = new PiOperator();
+        final String effectiveLatex = (new PiOperator()).getLatex();
 
         // -- assert
-        assertEquals("\\pi", effective.getLatex());
+        assertEquals("\\pi", effectiveLatex);
     }
 }

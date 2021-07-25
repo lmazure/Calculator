@@ -15,10 +15,10 @@ public class CoshTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new CoshOperator(n1);
+        final double effectiveValue = (new CoshOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.cosh(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.cosh(value), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class CoshTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new CoshOperator(n1);
+        final String effectiveDescription = (new CoshOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("cosh(n1)", effective.getDescription());
+        assertEquals("cosh(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +43,9 @@ public class CoshTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new CoshOperator(n1);
+        final String effectiveLatex = (new CoshOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("cosh(n1)", effective.getLatex());
+        assertEquals("cosh(n1)", effectiveLatex);
     }
 }

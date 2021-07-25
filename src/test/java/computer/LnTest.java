@@ -1,6 +1,7 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,43 @@ public class LnTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new LnOperator(n1);
+        final double effectiveValue = (new LnOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.log(1.3d), effective.getValue(), 0.0001d);
+        assertEquals(Math.log(1.3d), effectiveValue, 1E-10d);
+    }
+
+
+    @Test
+    @SuppressWarnings("static-method")
+    void negativeValueShouldGenerateException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(-1.69d, "n1");
+
+                // -- act
+                final double effectiveValue = (new LnOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void nulValueShouldGenerateException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(0.0d, "n1");
+
+                // -- act
+                final double effectiveValue = (new LnOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
     }
 
     @Test
@@ -28,10 +62,10 @@ public class LnTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new LnOperator(n1);
+        final String effectiveDescription = (new LnOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("ln(n1)", effective.getDescription());
+        assertEquals("ln(n1)", effectiveDescription);
     }
 
     @Test
@@ -42,9 +76,9 @@ public class LnTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new LnOperator(n1);
+        final String effectiveLatex = (new LnOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("ln(n1)", effective.getLatex());
+        assertEquals("ln(n1)", effectiveLatex);
     }
 }

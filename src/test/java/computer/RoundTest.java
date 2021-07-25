@@ -31,10 +31,10 @@ public class RoundTest {
         final Number n1 = new Number(inputValue, "n1");
 
         // -- act
-        final Operand effective = new RoundOperator(n1);
+        final double effectiveValue = (new RoundOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(expectedRes, effective.getValue(), 0.0001d, "Failure for " + description);
+        assertEquals(expectedRes, effectiveValue, 1E-10d, "Failure for " + description);
     }
 
     @Test
@@ -45,10 +45,10 @@ public class RoundTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new RoundOperator(n1);
+        final String effectiveDescription = (new RoundOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("[n1]", effective.getDescription());
+        assertEquals("[n1]", effectiveDescription);
     }
 
     @Test
@@ -59,9 +59,9 @@ public class RoundTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new RoundOperator(n1);
+        final String effectiveLatex = (new RoundOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("\\left[{n1}\\right]", effective.getLatex());
+        assertEquals("\\left[{n1}\\right]", effectiveLatex);
     }
 }

@@ -15,10 +15,10 @@ public class TanhTest {
         final Number n1 = new Number(value, "n1");
 
         // -- act
-        final Operand effective = new TanhOperator(n1);
+        final double effectiveValue = (new TanhOperator(n1)).getValue();
 
         // -- assert
-        assertEquals(Math.tanh(value), effective.getValue(), 0.0001d);
+        assertEquals(Math.tanh(value), effectiveValue, 1E-10d);
     }
 
     @Test
@@ -29,10 +29,10 @@ public class TanhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new TanhOperator(n1);
+        final String effectiveDescription = (new TanhOperator(n1)).getDescription();
 
         // -- assert
-        assertEquals("tanh(n1)", effective.getDescription());
+        assertEquals("tanh(n1)", effectiveDescription);
     }
 
     @Test
@@ -43,9 +43,9 @@ public class TanhTest {
         final Number n1 = new Number(1.3d, "n1");
 
         // -- act
-        final Operand effective = new TanhOperator(n1);
+        final String effectiveLatex = (new TanhOperator(n1)).getLatex();
 
         // -- assert
-        assertEquals("tanh(n1)", effective.getLatex());
+        assertEquals("tanh(n1)", effectiveLatex);
     }
 }

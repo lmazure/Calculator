@@ -14,15 +14,16 @@ public class ModTest {
         final Number n2 = new Number(0.3d, "n2");
 
         // -- act
-        final Operand effective = new ModOperator(n1, n2);
+        final double effectiveValue = (new ModOperator(n1, n2)).getValue();
 
         // -- assert
-        assertEquals(0.2d, effective.getValue(), 0.0001d);
+        assertEquals(0.2d, effectiveValue, 1E-10d);
     }
 
     @Test
     @SuppressWarnings("static-method")
-    void checkModuloZero() {
+    void moduloZeroShouldGenerateException() {
+        // -- assert
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
@@ -30,16 +31,15 @@ public class ModTest {
                 final Number n2 = new Number(0.0d, "n2");
 
                 // -- act
-                final Operand effective = new ModOperator(n1, n2);
-
-                // -- assert
-                System.out.println("result = " + effective.getValue());
+                final double effectiveValue = (new ModOperator(n1, n2)).getValue();
+                System.out.println("result = " + effectiveValue);
             });
     }
 
     @Test
     @SuppressWarnings("static-method")
-    void checkZeroModuloZero() {
+    void zeroModuloZeroShouldGenerateException() {
+        // -- assert
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
@@ -47,10 +47,8 @@ public class ModTest {
                 final Number n2 = new Number(0.0d, "n2");
 
                 // -- act
-                final Operand effective = new ModOperator(n1, n2);
-
-                // -- assert
-                System.out.println("result = " + effective.getValue());
+                final double effectiveValue = (new ModOperator(n1, n2)).getValue();
+                System.out.println("result = " + effectiveValue);
             });
     }
 
@@ -62,10 +60,10 @@ public class ModTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new ModOperator(n1, n2);
+        final String effectiveDescription = (new ModOperator(n1, n2)).getDescription();
 
         // -- assert
-        assertEquals("n1 % n2", effective.getDescription());
+        assertEquals("n1 % n2", effectiveDescription);
     }
 
     @Test
@@ -76,9 +74,9 @@ public class ModTest {
         final Number n2 = new Number(1.7d, "n2");
 
         // -- act
-        final Operand effective = new ModOperator(n1, n2);
+        final String effectiveLatex = (new ModOperator(n1, n2)).getLatex();
 
         // -- assert
-        assertEquals("{n1}\\mod{n2}", effective.getLatex());
+        assertEquals("{n1}\\mod{n2}", effectiveLatex);
     }
 }
