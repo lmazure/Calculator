@@ -70,7 +70,6 @@ public class Calculator {
         if (commandLineParser.getSvgFileName().isPresent()) {
             generateSvgFile(o, commandLineParser.getSvgFileName().get());
         }
-        
     }
 
     private static void displayExamples(final Parser parser) {
@@ -245,7 +244,7 @@ public class Calculator {
         }
         return null;
     }
-    
+
     private static void displayBrowser(final URI uri) {
         try {
             Desktop.getDesktop().browse(uri);
@@ -254,8 +253,12 @@ public class Calculator {
             System.exit(1);
         }
     }
-    
+
     private static String htmlEncode(final String str) {
-        return str.replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;").replace("\n", "<br>").replace(" ", "&nbsp;");
+        return str.replace("&", "&amp;")
+                  .replace(">", "&gt;")
+                  .replace("<", "&lt;")
+                  .replace("\n", "<br>")
+                  .replace(" ", "&nbsp;");
     }
 }
