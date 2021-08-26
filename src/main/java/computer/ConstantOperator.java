@@ -5,7 +5,7 @@ public abstract class ConstantOperator implements Operand {
     private final double value;
     private final String name;
     private final String latex;
-    
+
     public ConstantOperator(final double value,
                             final String name,
                             final String latex) {
