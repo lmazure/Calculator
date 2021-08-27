@@ -24,7 +24,7 @@ public class AcosTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void arccosOfValueLessThanMinusOneShoulThrowException() {
+    void arccosOfValueLessThanMinusOneShouldThrowException() {
 
         // -- assert
         assertThrows(ArithmeticException.class,
@@ -40,7 +40,7 @@ public class AcosTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void arccosOfValueGreaterOneShoulThrowException() {
+    void arccosOfValueGreaterOneShouldThrowException() {
 
         // -- assert
         assertThrows(ArithmeticException.class,
