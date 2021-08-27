@@ -25,7 +25,7 @@ public class AsinTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void arcsinOfValueLessThanMinusOneShoulThrowException() {
+    void arcsinOfValueLessThanMinusOneShouldThrowException() {
 
         // -- assert
         assertThrows(ArithmeticException.class,
@@ -41,7 +41,7 @@ public class AsinTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void arcsinOfValueGreaterOneShoulThrowException() {
+    void arcsinOfValueGreaterOneShouldThrowException() {
 
         // -- assert
         assertThrows(ArithmeticException.class,
