@@ -20,6 +20,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import computer.AbsOperator;
 import computer.AcosOperator;
@@ -60,6 +61,9 @@ public class Calculator {
         final Parser parser = buildParser(commandLineParser);
         if (commandLineParser.getDisplayExamples()) {
             displayExamples(parser);
+        }
+        if (commandLineParser.getDisplayOperators()) {
+            displayOperators(parser);
         }
         final LinkedList<String> expression = readExpression();
         final Operand o = parser.parse(expression);
@@ -106,9 +110,38 @@ public class Calculator {
                         writer.write("</tr>\n");
                         line++;
                     }
-                    //System.out.println(example.getLatex());
                     writer.write("</table><br>\n");
                 }
+                writer.write("</body>\n");
+                writer.write("</html>");
+                displayBrowser(path.toUri());
+            }
+        } catch (final IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    private static void displayOperators(final Parser parser) {
+        final String TABLE_STYLE = "border: 2px solid black; border-collapse: collapse";
+        final String CELL_STYLE = "border: 1px solid black; padding: 5px 5px";
+        try {
+            final Path path = Files.createTempFile(null, ".html");
+            try (final FileOutputStream stream = new FileOutputStream(path.toFile());
+                 final OutputStreamWriter writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8)) {
+                writer.write("<!DOCTYPE html>\n");
+                writer.write("<html>\n");
+                writer.write("<body>\n");
+                writer.write("<h1>Operators</h1>\n");
+                writer.write("<table style=\"" + TABLE_STYLE + "\">\n");
+                final Map<String, String> helps = parser.getHelps();
+                for (String operator: helps.keySet()) {
+                    writer.write("<tr style=\"" + CELL_STYLE + "\">\n");
+                    writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(operator) + "</td>\n");
+                    writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(helps.get(operator)) + "</td>\n");
+                    writer.write("</tr>\n");
+                }
+                writer.write("</table><br>\n");
                 writer.write("</body>\n");
                 writer.write("</html>");
                 displayBrowser(path.toUri());

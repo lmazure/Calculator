@@ -20,4 +20,10 @@ public class SubtractOperator extends BinaryOperator {
         }
         return other instanceof ModOperator;
     }
+
+    public static String getHelp() {
+        return "Pop b from the stack\n"
+                + "Pop a from the stack\n"
+                + "Push a minus b on the stack";
+    }
 }

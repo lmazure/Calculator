@@ -16,4 +16,10 @@ public class AsinOperator extends SimpleBracketedUnaryOperator {
             throw new ArithmeticException("asin of a value greater than 1");
         }
         return Math.asin(this.o1.getValue());
-    }}
+    }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its arcsine (expressed in radians between -π/2 and π/2) on the stack"; 
+    }
+}

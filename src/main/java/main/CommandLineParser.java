@@ -10,6 +10,7 @@ import java.util.Optional;
 public class CommandLineParser {
 
     private final boolean displayInBrowser;
+    private final boolean displayOperators;
     private final boolean displayExamples;
     private final Optional<String> svgFileName;
     private final Optional<Long> randomSeed;
@@ -17,6 +18,7 @@ public class CommandLineParser {
     public CommandLineParser(final String[] args) {
 
         boolean displayInBrowserTempo = false;
+        boolean displayOperatorsTempo = false;
         boolean displayExamplesTempo = false;
         Optional<String> svgFileNameTempo = Optional.empty();
         Optional<Long> randomSeedTempo = Optional.empty();
@@ -27,15 +29,20 @@ public class CommandLineParser {
                 printHelp(System.out);
                 System.exit(0);
             }
+            if (args[i].equals("-o")) {
+                displayOperatorsTempo = true;
+                i++;
+                continue;
+            }
             if (args[i].equals("-x")) {
                 displayExamplesTempo = true;
                 i++;
-                break;
+                continue;
             }
             if (args[i].equals("-b")) {
                 displayInBrowserTempo = true;
                 i++;
-                break;
+                continue;
             }
             if (args[i].equals("-f")) {
                 if (i == (args.length - 1)) {
@@ -45,7 +52,7 @@ public class CommandLineParser {
                 }
                 svgFileNameTempo = Optional.of(args[i+1]);
                 i += 2;
-                break;
+                continue;
             }
             if (args[i].equals("-s")) {
                 if (i == (args.length - 1)) {
@@ -61,7 +68,7 @@ public class CommandLineParser {
                     System.exit(1);
                 }
                 i += 2;
-                break;
+                continue;
             }
             System.err.println("unexpected argument: " + args[i]);
             printHelp(System.err);
@@ -69,6 +76,7 @@ public class CommandLineParser {
         }
 
         this.displayInBrowser = displayInBrowserTempo;
+        this.displayOperators = displayOperatorsTempo;
         this.displayExamples = displayExamplesTempo;
         this.svgFileName = svgFileNameTempo;
         this.randomSeed = randomSeedTempo;
@@ -79,6 +87,13 @@ public class CommandLineParser {
      */
     public boolean getDisplayInBrowser() {
         return this.displayInBrowser;
+    }
+
+    /**
+     * @return should the operator list be displayed?
+     */
+    public boolean getDisplayOperators() {
+        return this.displayOperators;
     }
 
     /**
@@ -107,6 +122,8 @@ public class CommandLineParser {
     static private void printHelp(final PrintStream ps) {
         ps.println("options:");
         ps.println("-h        display this help");
+        ps.println("-o        display list of operators");
+        ps.println("-x        display examples");
         ps.println("-b        display the expression in a Browser");
         ps.println("-f <file> generate a SVG file of the expression");
         ps.println("-s <seed> set the (integer) seed of random numbers");

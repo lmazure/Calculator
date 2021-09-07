@@ -21,4 +21,10 @@ public class ModOperator extends BinaryOperator {
         return other instanceof BinaryOperator &&
                !(other instanceof PowerOperator);
     }
+
+    public static String getHelp() {
+        return "Pop b from the stack\n"
+                + "Pop a from the stack\n"
+                + "Push a modulo b on the stack";
+    }
 }

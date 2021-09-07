@@ -17,4 +17,10 @@ public class MultiplyOperator extends BinaryOperator {
         return other instanceof BinaryOperator &&
                !(other instanceof MultiplyOperator || other instanceof PowerOperator);
     }
+
+    public static String getHelp() {
+        return "Pop b from the stack\n"
+                + "Pop a from the stack\n"
+                + "Push a multiplied by b on the stack";
+    }
 }

@@ -27,4 +27,8 @@ public class RandOperator implements Operand {
     public String getLatex() {
         return "rand()";
     }
+
+    public static String getHelp() {
+        return "Push a number randomly chosen in the [0, 1[ interval on the stack"; 
+    }
 }

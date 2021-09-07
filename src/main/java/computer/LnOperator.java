@@ -16,4 +16,9 @@ public class LnOperator extends SimpleBracketedUnaryOperator {
         }
         return Math.log(this.o1.getValue());
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its natural logarithm on the stack"; 
+    }
 }
