@@ -18,4 +18,9 @@ public class SqrtOperator extends SimpleBracketedUnaryOperator {
     public String getLatex() {
         return "\\sqrt{" + this.o1.getLatex() + "}";
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its square root on the stack"; 
+    }
 }

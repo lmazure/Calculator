@@ -16,4 +16,9 @@ public class AcosOperator extends SimpleBracketedUnaryOperator {
         }
         return Math.acos(this.o1.getValue());
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its arccosine (expressed in radians between 0 and π) on the stack"; 
+    }
 }

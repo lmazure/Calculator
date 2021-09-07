@@ -23,4 +23,10 @@ public class PowerOperator extends BinaryOperator {
                          final Position position) {
         return other instanceof BinaryOperator;
     }
+
+    public static String getHelp() {
+        return "Pop b from the stack\n"
+                + "Pop a from the stack\n"
+                + "Push a to the power b on the stack";
+    }
 }

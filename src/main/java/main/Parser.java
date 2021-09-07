@@ -2,11 +2,13 @@ package main;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.function.BiFunction;
 
 import computer.IncrementStack;
@@ -18,8 +20,11 @@ public class Parser {
     private final LinkedList<Operand> stack = new LinkedList<>();
     private final IncrementStack incrementStack = new IncrementStack();
     private final Map<String, OperatorClassRecord> operators = new HashMap<>();
+    private final Map<String, String> helps = new TreeMap<>();
 
     public Parser() {
+        this.helps.put("var <n>", "Push the variable of a given depth (starting at 0) on the stack");
+        this.helps.put("<real value>", "Push the value on the stack");
     }
 
     public void addOperatorClass(final Class<?> clazz) {
@@ -46,9 +51,29 @@ public class Parser {
             final OperatorClassRecord classRecord = new OperatorClassRecord(parameterCount - (lastParameterIsIncrementStack ? 1 : 0),
                                                                             buildConstructorCall(constructor, parameterCount, lastParameterIsIncrementStack));
             this.operators.put(syntax, classRecord);
+            Method helpMethod;
+            try {
+                helpMethod = clazz.getMethod("getHelp");
+            } catch (final NoSuchMethodException e) {
+                throw generateException(clazz, Optional.of("it should have a getHelp method"), Optional.of(e));
+            }
+            try {
+                final String help = (String)helpMethod.invoke(null);
+                this.helps.put(syntax, help);
+            } catch (final IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(clazz, Optional.of("error while calling its  getHelp method"), Optional.of(e));
+            }
         } catch (final SecurityException e) {
             throw generateException(clazz, Optional.empty(), Optional.of(e));
         }
+    }
+
+    /**
+     * @return list of (operator, help)
+     *   the operators are sorted alphabetically
+     */
+    public Map<String, String> getHelps() {
+        return this.helps;
     }
 
     private static BiFunction<Operand[], IncrementStack, Operand> buildConstructorCall(final Constructor<?> constructor,
@@ -165,6 +190,7 @@ public class Parser {
         }
         return this.stack.pop();
     }
+
 
     public class OperatorClassRecord {
         private final int operandCount;

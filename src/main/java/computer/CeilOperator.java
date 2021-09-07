@@ -10,4 +10,9 @@ public class CeilOperator extends SimpleUnaryOperator {
     public String getLatex() {
         return "\\lceil{" + this.o1.getLatex() + "}\\rceil";
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its ceiling value on the stack"; 
+    }
 }

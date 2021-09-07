@@ -9,4 +9,9 @@ public class AsinhOperator extends SimpleBracketedUnaryOperator {
     private static double asinh(final double value) {
         return Math.log(value + Math.sqrt(value * value + 1));
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its inverse hyperbolic sine on the stack"; 
+    }
 }

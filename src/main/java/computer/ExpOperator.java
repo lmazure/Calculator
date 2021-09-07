@@ -18,4 +18,9 @@ public class ExpOperator extends SimpleUnaryOperator {
     public String getLatex() {
         return "e^" + this.o1.getLatex();
     }
+
+    public static String getHelp() {
+        return "Pop an element from the stack\n"
+               + "Push its exponential on the stack"; 
+    }
 }
