@@ -13,6 +13,7 @@ import java.util.function.BiFunction;
 
 import computer.IncrementStack;
 import computer.Operand;
+import computer.RecVarOperator;
 import computer.VarOperator;
 
 public class Parser {
@@ -23,7 +24,8 @@ public class Parser {
     private final Map<String, String> helps = new TreeMap<>();
 
     public Parser() {
-        this.helps.put("var <n>", "Push the variable of a given depth (starting at 0) on the stack");
+        this.helps.put("var <n>", "Push the increment variable of a given depth (starting at 0) on the stack");
+        this.helps.put("recvar <n>", "Push the recursion variable of a given depth (starting at 0) on the stack");
         this.helps.put("<real value>", "Push the value on the stack");
     }
 
@@ -106,6 +108,12 @@ public class Parser {
                 } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                     throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
                 }};
+            case 5: return (final Operand[] o, final IncrementStack s) -> {
+                try {
+                    return (Operand)constructor.newInstance(o[0], o[1], o[2], o[3], s);
+                } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                    throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+                }};
             default:
                 throw generateException(constructor.getDeclaringClass(), Optional.of("its contructor has too many parameters"), Optional.empty());
             }
@@ -138,6 +146,12 @@ public class Parser {
         case 4: return (final Operand[] o, final IncrementStack s) -> {
             try {
                 return (Operand)constructor.newInstance(o[0], o[1], o[2], o[4]);
+            } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
+            }};
+        case 5: return (final Operand[] o, final IncrementStack s) -> {
+            try {
+                return (Operand)constructor.newInstance(o[0], o[1], o[2], o[4], o[5]);
             } catch (final InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 throw generateException(constructor.getDeclaringClass(), Optional.empty(), Optional.of(e));
             }};
@@ -179,6 +193,9 @@ public class Parser {
             } else if (line.startsWith("var ")) {
                 final int varNumber = Integer.parseInt(line.substring(4));
                 this.stack.push(new VarOperator(varNumber, this.incrementStack));
+            } else if (line.startsWith("recvar ")) {
+                final int varNumber = Integer.parseInt(line.substring(7));
+                this.stack.push(new RecVarOperator(varNumber, this.incrementStack));
             } else {
                 final double value = Double.parseDouble(line);
                 this.stack.push(new computer.Number(value, line));

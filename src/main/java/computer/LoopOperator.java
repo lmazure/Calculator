@@ -34,8 +34,8 @@ abstract public class LoopOperator implements Operand {
 
     @Override
     public double getValue() {
-        final int min = (int) Math.round(this.o1.getValue());
-        final int max = (int) Math.round(this.o2.getValue());
+        final int min = (int)Math.round(this.o1.getValue());
+        final int max = (int)Math.round(this.o2.getValue());
         if (max < min) {
             throw new BadBoundsException("Bad bounds (min=" + min + " , max=" + max + ")");
         }
@@ -50,7 +50,7 @@ abstract public class LoopOperator implements Operand {
 
     @Override
     public String getDescription() {
-        final String name = this.incrementStack.getNameOfTop();
+        final String name = this.incrementStack.getIncrementNameOfTop();
         this.incrementStack.push(0);
         final String desc = this.description +
                             " for " +
@@ -68,7 +68,7 @@ abstract public class LoopOperator implements Operand {
 
     @Override
     public String getLatex() {
-        final String name = this.incrementStack.getNameOfTop();
+        final String name = this.incrementStack.getIncrementNameOfTop();
         this.incrementStack.push(0);
         final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" +
                            ((this.o3 instanceof BinaryOperator) ? "\\left(" + this.o3.getLatex() + "\\right)"

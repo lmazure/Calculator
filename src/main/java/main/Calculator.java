@@ -45,6 +45,7 @@ import computer.PiOperator;
 import computer.PowerOperator;
 import computer.ProductOperator;
 import computer.RandOperator;
+import computer.RecursionOperator;
 import computer.RoundOperator;
 import computer.SinOperator;
 import computer.SinhOperator;
@@ -59,11 +60,8 @@ public class Calculator {
     public static void main(final String[] args) {
         final CommandLineParser commandLineParser = new CommandLineParser(args);
         final Parser parser = buildParser(commandLineParser);
-        if (commandLineParser.getDisplayExamples()) {
-            displayExamples(parser);
-        }
-        if (commandLineParser.getDisplayOperators()) {
-            displayOperators(parser);
+        if (commandLineParser.getDisplayOperators() || commandLineParser.getDisplayExamples()) {
+            displayHelp(parser, commandLineParser.getDisplayOperators(), commandLineParser.getDisplayExamples());
         }
         final LinkedList<String> expression = readExpression();
         final Operand o = parser.parse(expression);
@@ -76,7 +74,9 @@ public class Calculator {
         }
     }
 
-    private static void displayExamples(final Parser parser) {
+    private static void displayHelp(final Parser parser,
+                                    final boolean displayOperators,
+                                    final boolean displayExamples) {
         final String TABLE_STYLE = "border: 2px solid black; border-collapse: collapse";
         final String CELL_STYLE = "border: 1px solid black; padding: 5px 5px";
         try {
@@ -86,62 +86,46 @@ public class Calculator {
                 writer.write("<!DOCTYPE html>\n");
                 writer.write("<html>\n");
                 writer.write("<body>\n");
-                writer.write("<h1>Examples</h1>\n");
-                for (Formula formula: FormulaRepository.getFormulas()) {
-                    int  line = 0;
-                    final Operand example = parser.parse(formula.getExpression());
+                if (displayOperators) {
+                    writer.write("<h1>Operators</h1>\n");
                     writer.write("<table style=\"" + TABLE_STYLE + "\">\n");
-                    final List<String> expression = formula.getExpression();
-                    final int expressionSize = expression.size();
-                    final Instant t1 = Instant.now();
-                    final URI codecogsUri = getCodecogsUri(example);
-                    final Instant t2 = Instant.now();
-                    final long duration = ChronoUnit.MILLIS.between(t1, t2);
-                    for (String s: expression) {
+                    final Map<String, String> helps = parser.getHelps();
+                    for (String operator: helps.keySet()) {
                         writer.write("<tr style=\"" + CELL_STYLE + "\">\n");
-                        writer.write("<td style=\"" + CELL_STYLE + "\">" + s + "</td>\n");
-                        if (line == 0) {
-                            writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(example.getDescription()) + "</td>\n");
-                        } else if (line == 1) {
-                                writer.write("<td style=\"" + CELL_STYLE + "\" rowspan=\"" + (expressionSize - 2) + "\"><iframe frameBorder=\"0\" src=\"" + codecogsUri + "\"></iframe></td>\n");
-                        } else if (line == (expressionSize - 1)) {
-                            writer.write("<td style=\"" + CELL_STYLE + "\"> duration = " + duration + " ms</td>\n");
-                        }
+                        writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(operator) + "</td>\n");
+                        writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(helps.get(operator)) + "</td>\n");
                         writer.write("</tr>\n");
-                        line++;
                     }
                     writer.write("</table><br>\n");
                 }
-                writer.write("</body>\n");
-                writer.write("</html>");
-                displayBrowser(path.toUri());
-            }
-        } catch (final IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
-
-    private static void displayOperators(final Parser parser) {
-        final String TABLE_STYLE = "border: 2px solid black; border-collapse: collapse";
-        final String CELL_STYLE = "border: 1px solid black; padding: 5px 5px";
-        try {
-            final Path path = Files.createTempFile(null, ".html");
-            try (final FileOutputStream stream = new FileOutputStream(path.toFile());
-                 final OutputStreamWriter writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8)) {
-                writer.write("<!DOCTYPE html>\n");
-                writer.write("<html>\n");
-                writer.write("<body>\n");
-                writer.write("<h1>Operators</h1>\n");
-                writer.write("<table style=\"" + TABLE_STYLE + "\">\n");
-                final Map<String, String> helps = parser.getHelps();
-                for (String operator: helps.keySet()) {
-                    writer.write("<tr style=\"" + CELL_STYLE + "\">\n");
-                    writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(operator) + "</td>\n");
-                    writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(helps.get(operator)) + "</td>\n");
-                    writer.write("</tr>\n");
+                if (displayExamples) {
+                    writer.write("<h1>Examples</h1>\n");
+                    for (Formula formula: FormulaRepository.getFormulas()) {
+                        int  line = 0;
+                        final Operand example = parser.parse(formula.getExpression());
+                        writer.write("<table style=\"" + TABLE_STYLE + "\">\n");
+                        final List<String> expression = formula.getExpression();
+                        final int expressionSize = expression.size();
+                        final Instant t1 = Instant.now();
+                        final URI codecogsUri = getCodecogsUri(example);
+                        final Instant t2 = Instant.now();
+                        final long duration = ChronoUnit.MILLIS.between(t1, t2);
+                        for (String s: expression) {
+                            writer.write("<tr style=\"" + CELL_STYLE + "\">\n");
+                            writer.write("<td style=\"" + CELL_STYLE + "\">" + s + "</td>\n");
+                            if (line == 0) {
+                                writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(example.getDescription()) + "</td>\n");
+                            } else if (line == 1) {
+                                    writer.write("<td style=\"" + CELL_STYLE + "\" rowspan=\"" + (expressionSize - 2) + "\"><iframe frameBorder=\"0\" src=\"" + codecogsUri + "\"></iframe></td>\n");
+                            } else if (line == (expressionSize - 1)) {
+                                writer.write("<td style=\"" + CELL_STYLE + "\"> duration = " + duration + " ms</td>\n");
+                            }
+                            writer.write("</tr>\n");
+                            line++;
+                        }
+                        writer.write("</table><br>\n");
+                    }
                 }
-                writer.write("</table><br>\n");
                 writer.write("</body>\n");
                 writer.write("</html>");
                 displayBrowser(path.toUri());
@@ -206,6 +190,7 @@ public class Calculator {
         parser.addOperatorClass(PiOperator.class);
         parser.addOperatorClass(SumOperator.class);
         parser.addOperatorClass(ProductOperator.class);
+        parser.addOperatorClass(RecursionOperator.class);
         return parser;
     }
 

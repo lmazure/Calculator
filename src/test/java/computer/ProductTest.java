@@ -75,6 +75,7 @@ public class ProductTest {
                 System.out.println("result = " + effectiveValue);
             });
     }
+
     @Test
     @SuppressWarnings("static-method")
     void checkDescription() {

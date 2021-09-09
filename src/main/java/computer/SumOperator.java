@@ -14,8 +14,8 @@ public class SumOperator extends LoopOperator {
                 + "Pop b from the stack\n"
                 + "Pop a from the stack\n"
                 + "Compute imin the rounded value of a\n"
-                + "Compute omax the rounded value of b\n"
-                + "From i equal imin to imax, set the value of the var of the current depth to i and compute the value of c"
+                + "Compute imax the rounded value of b\n"
+                + "From i equal imin to imax, set the value of the var of the current depth to i and compute the value of c\n"
                 + "Add all these values and push the result on the stack";
     }
 }
