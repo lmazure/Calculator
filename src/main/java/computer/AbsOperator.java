@@ -14,6 +14,6 @@ public class AbsOperator extends SimpleUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its absolute value on the stack"; 
+               + "Push its absolute value on the stack";
     }
 }

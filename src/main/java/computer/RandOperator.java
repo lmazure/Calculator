@@ -29,6 +29,6 @@ public class RandOperator implements Operand {
     }
 
     public static String getHelp() {
-        return "Push a number randomly chosen in the [0, 1[ interval on the stack"; 
+        return "Push a number randomly chosen in the [0, 1[ interval on the stack";
     }
 }

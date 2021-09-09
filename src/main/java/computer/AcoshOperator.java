@@ -12,6 +12,6 @@ public class AcoshOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its inverse hyperbolic cosine on the stack"; 
+               + "Push its inverse hyperbolic cosine on the stack";
     }
 }

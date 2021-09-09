@@ -13,6 +13,6 @@ public class RoundOperator extends SimpleUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its rounded value on the stack"; 
+               + "Push its rounded value on the stack";
     }
 }

@@ -8,6 +8,6 @@ public class CoshOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its hyperbolic cosine on the stack"; 
+               + "Push its hyperbolic cosine on the stack";
     }
 }

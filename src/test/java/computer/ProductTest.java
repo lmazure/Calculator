@@ -12,13 +12,13 @@ public class ProductTest {
     void checkValueForIntegerMixMax() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
         final Number n3 = new Number(1.5d, "n3");
 
         // -- act
-        final double effectiveValue = (new ProductOperator(n1, n2, n3, incrementStack)).getValue();
+        final double effectiveValue = (new ProductOperator(n1, n2, n3, stack)).getValue();
 
         // -- assert
         assertEquals(11.390625d, effectiveValue, 1E-10d);
@@ -29,13 +29,13 @@ public class ProductTest {
     void checkValueForFloatMixMax() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(2.3d, "n1");
         final Number n2 = new Number(7.4d, "n2");
         final Number n3 = new Number(1.5d, "n3");
 
         // -- act
-        final double effectiveValue = (new ProductOperator(n1, n2, n3, incrementStack)).getValue();
+        final double effectiveValue = (new ProductOperator(n1, n2, n3, stack)).getValue();
 
         // -- assert
         assertEquals(11.390625d, effectiveValue, 1E-10d);
@@ -46,13 +46,13 @@ public class ProductTest {
     void checkValueForMultipliedVariable() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(3.d, "n1");
         final Number n2 = new Number(7.d, "n2");
-        final VarOperator n3 = new VarOperator(0, incrementStack);
+        final VarOperator n3 = new VarOperator(0, stack);
 
         // -- act
-        final double effectiveValue = (new ProductOperator(n1, n2, n3, incrementStack)).getValue();
+        final double effectiveValue = (new ProductOperator(n1, n2, n3, stack)).getValue();
 
         // -- assert
         assertEquals(2520.d, effectiveValue, 1E-10d);
@@ -65,28 +65,29 @@ public class ProductTest {
         assertThrows(BadBoundsException.class,
             ()->{
                 // -- arrange
-                final IncrementStack incrementStack = new IncrementStack();
+                final Stack stack = new Stack();
                 final Number n1 = new Number(19.d, "n1");
                 final Number n2 = new Number(7.d, "n2");
-                final VarOperator n3 = new VarOperator(0, incrementStack);
+                final VarOperator n3 = new VarOperator(0, stack);
 
                 // -- act
-                final double effectiveValue = (new ProductOperator(n1, n2, n3, incrementStack)).getValue();
+                final double effectiveValue = (new ProductOperator(n1, n2, n3, stack)).getValue();
                 System.out.println("result = " + effectiveValue);
             });
     }
+
     @Test
     @SuppressWarnings("static-method")
     void checkDescription() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(-2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
-        final VarOperator n3 = new VarOperator(0, incrementStack);
+        final VarOperator n3 = new VarOperator(0, stack);
 
         // -- act
-        final String effectiveDescription = (new ProductOperator(n1, n2, n3, incrementStack)).getDescription();
+        final String effectiveDescription = (new ProductOperator(n1, n2, n3, stack)).getDescription();
 
         // -- assert
         assertEquals("product for i equal n1 to n2 of {\n    i\n}", effectiveDescription);
@@ -97,16 +98,16 @@ public class ProductTest {
     void checkDescriptionOfNestedProducts() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(-2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
         final Number n3 = new Number(19.d, "n3");
         final Number n4 = new Number(7.d, "n4");
-        final VarOperator n5 = new VarOperator(1, incrementStack);
+        final VarOperator n5 = new VarOperator(1, stack);
 
         // -- act
-        final Operand n6 = new SumOperator(n3, n4, n5, incrementStack);
-        final String effectiveDescription = (new ProductOperator(n1, n2, n6, incrementStack)).getDescription();
+        final Operand n6 = new SumOperator(n3, n4, n5, stack);
+        final String effectiveDescription = (new ProductOperator(n1, n2, n6, stack)).getDescription();
 
         // -- assert
         assertEquals("product for i equal n1 to n2 of {\n    sum for j equal n3 to n4 of {\n        j\n    }\n}", effectiveDescription);
@@ -117,13 +118,13 @@ public class ProductTest {
     void checkLatex() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(-2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
-        final VarOperator n3 = new VarOperator(0, incrementStack);
+        final VarOperator n3 = new VarOperator(0, stack);
 
         // -- act
-        final String effectiveLatex = (new ProductOperator(n1, n2, n3, incrementStack)).getLatex();
+        final String effectiveLatex = (new ProductOperator(n1, n2, n3, stack)).getLatex();
 
         // -- assert
         assertEquals("\\prod\\limits_{i=n1}^{i=n2}i", effectiveLatex);

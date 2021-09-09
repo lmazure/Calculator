@@ -8,7 +8,7 @@ abstract public class LoopOperator implements Operand {
     private final Operand o1;
     private final Operand o2;
     private final Operand o3;
-    private final IncrementStack incrementStack;
+    private final Stack stack;
     private final double initialValue;
     private final DoubleBinaryOperator operator;
     private final String description;
@@ -17,7 +17,7 @@ abstract public class LoopOperator implements Operand {
     public LoopOperator(final Operand o1,
                         final Operand o2,
                         final Operand o3,
-                        final IncrementStack incrementStack,
+                        final Stack stack,
                         final double initialValue,
                         final DoubleBinaryOperator operator,
                         final String description,
@@ -29,29 +29,29 @@ abstract public class LoopOperator implements Operand {
         this.initialValue = initialValue;
         this.operator = operator;
         this.latex = latex;
-        this.incrementStack = incrementStack;
+        this.stack = stack;
     }
 
     @Override
     public double getValue() {
-        final int min = (int) Math.round(this.o1.getValue());
-        final int max = (int) Math.round(this.o2.getValue());
+        final int min = (int)Math.round(this.o1.getValue());
+        final int max = (int)Math.round(this.o2.getValue());
         if (max < min) {
             throw new BadBoundsException("Bad bounds (min=" + min + " , max=" + max + ")");
         }
         double result = this.initialValue;
         for (int i = min ; i <= max; i++) {
-            this.incrementStack.push(i);
+            this.stack.push(i);
             result = this.operator.applyAsDouble(result, this.o3.getValue());
-            this.incrementStack.discardTop();
+            this.stack.discardTop();
         }
         return result;
     }
 
     @Override
     public String getDescription() {
-        final String name = this.incrementStack.getNameOfTop();
-        this.incrementStack.push(0);
+        final String name = this.stack.getIncrementNameOfTop();
+        this.stack.push(0);
         final String desc = this.description +
                             " for " +
                             name +
@@ -62,18 +62,18 @@ abstract public class LoopOperator implements Operand {
                             " of {\n" +
                             this.o3.getDescription().lines().map(s -> "    " + s).collect(Collectors.joining("\n")) +
                             "\n}";
-        this.incrementStack.discardTop();
+        this.stack.discardTop();
         return desc;
     }
 
     @Override
     public String getLatex() {
-        final String name = this.incrementStack.getNameOfTop();
-        this.incrementStack.push(0);
+        final String name = this.stack.getIncrementNameOfTop();
+        this.stack.push(0);
         final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" +
                            ((this.o3 instanceof BinaryOperator) ? "\\left(" + this.o3.getLatex() + "\\right)"
                                                                 : this.o3.getLatex());
-        this.incrementStack.discardTop();
+        this.stack.discardTop();
         return lat;
     }
 }

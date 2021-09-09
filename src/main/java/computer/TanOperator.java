@@ -8,6 +8,6 @@ public class TanOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its tangent (considering that the value is in radians) on the stack"; 
+               + "Push its tangent (considering that the value is in radians) on the stack";
     }
 }
