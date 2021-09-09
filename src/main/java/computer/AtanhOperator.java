@@ -12,6 +12,6 @@ public class AtanhOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its inverse hyperbolic tangent on the stack"; 
+               + "Push its inverse hyperbolic tangent on the stack";
     }
 }

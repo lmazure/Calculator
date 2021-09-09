@@ -21,6 +21,6 @@ public class ExpOperator extends SimpleUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its exponential on the stack"; 
+               + "Push its exponential on the stack";
     }
 }

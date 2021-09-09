@@ -19,6 +19,6 @@ public class AcosOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its arccosine (expressed in radians between 0 and π) on the stack"; 
+               + "Push its arccosine (expressed in radians between 0 and π) on the stack";
     }
 }

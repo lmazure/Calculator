@@ -19,6 +19,6 @@ public class LnOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its natural logarithm on the stack"; 
+               + "Push its natural logarithm on the stack";
     }
 }

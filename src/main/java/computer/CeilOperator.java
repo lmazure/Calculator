@@ -13,6 +13,6 @@ public class CeilOperator extends SimpleUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its ceiling value on the stack"; 
+               + "Push its ceiling value on the stack";
     }
 }

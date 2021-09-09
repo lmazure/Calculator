@@ -20,6 +20,6 @@ public class AsinOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its arcsine (expressed in radians between -π/2 and π/2) on the stack"; 
+               + "Push its arcsine (expressed in radians between -π/2 and π/2) on the stack";
     }
 }

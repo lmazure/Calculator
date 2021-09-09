@@ -26,15 +26,15 @@ public class RecursionTest {
                                         final String expectedResult) {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(Double.parseDouble(imin), "imin");
         final Number n2 = new Number(Double.parseDouble(imax), "imax");
         final Number n3 = new Number(Double.parseDouble(initialRecursionValue), "init");
-        final RecVarOperator rec = new RecVarOperator(0, incrementStack);
+        final RecVarOperator rec = new RecVarOperator(0, stack);
         final Number one = new Number(1d, "1");
         final AddOperator add = new AddOperator(one, rec);
         final DivideOperator divide = new DivideOperator(one, add);
-        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, incrementStack);
+        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, stack);
 
         // -- act
         final double effectiveValue = recursion.getValue();
@@ -59,16 +59,16 @@ public class RecursionTest {
                                       final String expectedResult) {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(Double.parseDouble(imin), "imin");
         final Number n2 = new Number(Double.parseDouble(imax), "imax");
         final Number n3 = new Number(Double.parseDouble(initialRecursionValue), "init");
-        final RecVarOperator rec = new RecVarOperator(0, incrementStack);
-        final VarOperator i = new VarOperator(0, incrementStack);
+        final RecVarOperator rec = new RecVarOperator(0, stack);
+        final VarOperator i = new VarOperator(0, stack);
         final Number one = new Number(1d, "1");
         final AddOperator add = new AddOperator(i, rec);
         final DivideOperator divide = new DivideOperator(one, add);
-        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, incrementStack);
+        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, stack);
 
         // -- act
         final double effectiveValue = recursion.getValue();
@@ -84,14 +84,14 @@ public class RecursionTest {
         assertThrows(BadBoundsException.class,
             ()->{
                 // -- arrange
-                final IncrementStack incrementStack = new IncrementStack();
+                final Stack stack = new Stack();
                 final Number n1 = new Number(19.d, "n1");
                 final Number n2 = new Number(7.d, "n2");
                 final Number n3 = new Number(0.d, "n3");
-                final VarOperator n4 = new VarOperator(0, incrementStack);
+                final VarOperator n4 = new VarOperator(0, stack);
 
                 // -- act
-                final double effectiveValue = (new RecursionOperator(n1, n2, n3, n4, incrementStack)).getValue();
+                final double effectiveValue = (new RecursionOperator(n1, n2, n3, n4, stack)).getValue();
                 System.out.println("result = " + effectiveValue);
             });
     }
@@ -101,16 +101,16 @@ public class RecursionTest {
     void checkDescriptionOfOneDividedByOnePlusX() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(1., "imin");
         final Number n2 = new Number(2., "imax");
         final Number n3 = new Number(42., "init");
-        final RecVarOperator rec = new RecVarOperator(0, incrementStack);
-        final VarOperator i = new VarOperator(0, incrementStack);
+        final RecVarOperator rec = new RecVarOperator(0, stack);
+        final VarOperator i = new VarOperator(0, stack);
         final Number one = new Number(1d, "1");
         final AddOperator add = new AddOperator(i, rec);
         final DivideOperator divide = new DivideOperator(one, add);
-        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, incrementStack);
+        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, stack);
 
         // -- act
         final String effectiveDescription = recursion.getDescription();
@@ -126,16 +126,16 @@ public class RecursionTest {
     void checkDescriptionOfOneDividedByIPlusX() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(1., "imin");
         final Number n2 = new Number(2., "imax");
         final Number n3 = new Number(42., "init");
-        final RecVarOperator rec = new RecVarOperator(0, incrementStack);
-        final VarOperator i = new VarOperator(0, incrementStack);
+        final RecVarOperator rec = new RecVarOperator(0, stack);
+        final VarOperator i = new VarOperator(0, stack);
         final Number one = new Number(1d, "1");
         final AddOperator add = new AddOperator(i, rec);
         final DivideOperator divide = new DivideOperator(one, add);
-        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, incrementStack);
+        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, stack);
 
         // -- act
         final String effectiveDescription = recursion.getDescription();
@@ -152,16 +152,16 @@ public class RecursionTest {
     void checkDescriptionOfNestedProducts() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(-2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
         final Number n3 = new Number(19.d, "n3");
         final Number n4 = new Number(7.d, "n4");
-        final VarOperator n5 = new VarOperator(1, incrementStack);
+        final VarOperator n5 = new VarOperator(1, stack);
 
         // -- act
-        final Operand n6 = new SumOperator(n3, n4, n5, incrementStack);
-        final String effectiveDescription = (new ProductOperator(n1, n2, n6, incrementStack)).getDescription();
+        final Operand n6 = new SumOperator(n3, n4, n5, stack);
+        final String effectiveDescription = (new ProductOperator(n1, n2, n6, stack)).getDescription();
 
         // -- assert
         assertEquals("product for i equal n1 to n2 of {\n    sum for j equal n3 to n4 of {\n        j\n    }\n}", effectiveDescription);
@@ -173,13 +173,13 @@ public class RecursionTest {
     void checkLatex() {
 
         // -- arrange
-        final IncrementStack incrementStack = new IncrementStack();
+        final Stack stack = new Stack();
         final Number n1 = new Number(-2.d, "n1");
         final Number n2 = new Number(7.d, "n2");
-        final VarOperator n3 = new VarOperator(0, incrementStack);
+        final VarOperator n3 = new VarOperator(0, stack);
 
         // -- act
-        final String effectiveLatex = (new ProductOperator(n1, n2, n3, incrementStack)).getLatex();
+        final String effectiveLatex = (new ProductOperator(n1, n2, n3, stack)).getLatex();
 
         // -- assert
         assertEquals("\\prod\\limits_{i=n1}^{i=n2}i", effectiveLatex);

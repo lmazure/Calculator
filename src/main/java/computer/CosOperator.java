@@ -8,6 +8,6 @@ public class CosOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its cosine (considering that the value is in radians) on the stack"; 
+               + "Push its cosine (considering that the value is in radians) on the stack";
     }
 }

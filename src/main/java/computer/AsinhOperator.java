@@ -12,6 +12,6 @@ public class AsinhOperator extends SimpleBracketedUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its inverse hyperbolic sine on the stack"; 
+               + "Push its inverse hyperbolic sine on the stack";
     }
 }

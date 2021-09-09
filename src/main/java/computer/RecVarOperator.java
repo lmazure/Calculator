@@ -4,17 +4,17 @@ public class RecVarOperator implements Operand {
 
 
     private final int level;
-    private final IncrementStack incrementStack;
+    private final Stack stack;
 
     public RecVarOperator(final int level,
-                          final IncrementStack incrementStack) {
+                          final Stack stack) {
         this.level = level;
-        this.incrementStack = incrementStack;
+        this.stack = stack;
     }
 
     @Override
     public double getValue() {
-        return this.incrementStack.getRecursionValue(this.level);
+        return this.stack.getRecursionValue(this.level);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class RecVarOperator implements Operand {
 
     @Override
     public String getLatex() {
-        return this.incrementStack.getRecursionLatex(this.level);
+        return this.stack.getRecursionLatex(this.level);
     }
 
     public static String getHelp() {

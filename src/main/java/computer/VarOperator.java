@@ -3,27 +3,27 @@ package computer;
 public class VarOperator implements Operand {
 
     private final int level;
-    private final IncrementStack incrementStack;
+    private final Stack stack;
 
     public VarOperator(final int level,
-                       final IncrementStack incrementStack) {
+                       final Stack stack) {
         this.level = level;
-        this.incrementStack = incrementStack;
+        this.stack = stack;
     }
 
     @Override
     public double getValue() {
-        return this.incrementStack.getIncrementValue(this.level);
+        return this.stack.getIncrementValue(this.level);
     }
 
     @Override
     public String getDescription() {
-        return IncrementStack.getIncrementName(this.level);
+        return Stack.getIncrementName(this.level);
     }
 
     @Override
     public String getLatex() {
-        return IncrementStack.getIncrementName(this.level);
+        return Stack.getIncrementName(this.level);
     }
 
 

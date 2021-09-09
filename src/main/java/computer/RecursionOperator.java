@@ -8,19 +8,18 @@ public class RecursionOperator implements Operand {
     private final Operand o2;
     private final Operand o3;
     private final Operand o4;
-    private final IncrementStack incrementStack;
-    private int recurLatextDepth = 0;
+    private final Stack stack;
 
     public RecursionOperator(final Operand o1,
                              final Operand o2,
                              final Operand o3,
                              final Operand o4,
-                             final IncrementStack incrementStack) {
+                             final Stack stack) {
         this.o1 = o1;
         this.o2 = o2;
         this.o3 = o3;
         this.o4 = o4;
-        this.incrementStack = incrementStack;
+        this.stack = stack;
     }
 
     @Override
@@ -32,9 +31,9 @@ public class RecursionOperator implements Operand {
         }
         double result = this.o3.getValue();
         for (int i = max ; i >= min; i--) {
-            this.incrementStack.push(i, result);
+            this.stack.push(i, result);
             result = this.o4.getValue();
-            this.incrementStack.discardTop();
+            this.stack.discardTop();
         }
         return result;
     }
@@ -54,8 +53,8 @@ public class RecursionOperator implements Operand {
 
     @Override
     public String getDescription() {
-        final String name = this.incrementStack.getIncrementNameOfTop();
-        this.incrementStack.push(0);
+        final String name = this.stack.getIncrementNameOfTop();
+        this.stack.push(0);
         final String desc = "for " +
                             name +
                             " equal " +
@@ -67,7 +66,7 @@ public class RecursionOperator implements Operand {
                             "\n} starting with value " +
                             this.o3.getDescription() +
                             " for initializing the deepest recursion";
-        this.incrementStack.discardTop();
+        this.stack.discardTop();
         return desc;
     }
 
@@ -76,9 +75,9 @@ public class RecursionOperator implements Operand {
 
         String result = "...";
         for (int i = 0 ; i < 3; i++) {
-            this.incrementStack.pushLatex(result);
+            this.stack.pushLatex(result);
             result = this.o4.getLatex();
-            this.incrementStack.discardTop();
+            this.stack.discardTop();
         }
         return result;
     }

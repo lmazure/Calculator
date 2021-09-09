@@ -13,6 +13,6 @@ public class FloorOperator extends SimpleUnaryOperator {
 
     public static String getHelp() {
         return "Pop an element from the stack\n"
-               + "Push its floor value on the stack"; 
+               + "Push its floor value on the stack";
     }
 }
