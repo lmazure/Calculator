@@ -74,9 +74,10 @@ public class RecursionOperator implements Operand {
     public String getLatex() {
 
         final int min = (int)Math.round(this.o1.getValue());
+        final int numberOfDisplayedRecursions = 5;
         String result = "...";
-        for (int i = 0 ; i < 3; i++) {
-            this.stack.pushLatex(generateIncrementName(), Integer.toString(i + min));
+        for (int i = 0 ; i < numberOfDisplayedRecursions; i++) {
+            this.stack.pushLatex(Integer.toString(min + numberOfDisplayedRecursions - 1 - i), result);
             result = this.o4.getLatex();
             this.stack.discardTop();
         }
