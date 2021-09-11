@@ -53,10 +53,10 @@ public class RecursionOperator implements Operand {
 
     @Override
     public String getDescription() {
-        final String name = this.stack.getIncrementNameOfTop();
-        this.stack.push(0);
+        final String incrementName = generateIncrementName();
+        this.stack.pushDescription(incrementName, "recvar " + (this.stack.getCurrentDepth() + 1));
         final String desc = "for " +
-                            name +
+                            incrementName +
                             " equal " +
                             this.o1.getDescription() +
                             " to " +
@@ -73,12 +73,18 @@ public class RecursionOperator implements Operand {
     @Override
     public String getLatex() {
 
+        final int min = (int)Math.round(this.o1.getValue());
         String result = "...";
         for (int i = 0 ; i < 3; i++) {
-            this.stack.pushLatex(result);
+            this.stack.pushLatex(generateIncrementName(), Integer.toString(i + min));
             result = this.o4.getLatex();
             this.stack.discardTop();
         }
         return result;
+    }
+
+    private String generateIncrementName() {
+        final int depth = this.stack.getCurrentDepth();
+        return ""+ (char)('i' + (depth + 1));
     }
 }

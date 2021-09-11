@@ -50,8 +50,8 @@ abstract public class LoopOperator implements Operand {
 
     @Override
     public String getDescription() {
-        final String name = this.stack.getIncrementNameOfTop();
-        this.stack.push(0);
+        final String name = generateIncrementName();
+        this.stack.pushDescription(name);
         final String desc = this.description +
                             " for " +
                             name +
@@ -68,12 +68,17 @@ abstract public class LoopOperator implements Operand {
 
     @Override
     public String getLatex() {
-        final String name = this.stack.getIncrementNameOfTop();
-        this.stack.push(0);
+        final String name = generateIncrementName();
+        this.stack.pushLatex(name);
         final String lat = "\\" + this.latex+ "\\limits_{" + name + "=" + this.o1.getLatex() + "}^{" + name + "=" + this.o2.getLatex() + "}" +
                            ((this.o3 instanceof BinaryOperator) ? "\\left(" + this.o3.getLatex() + "\\right)"
                                                                 : this.o3.getLatex());
         this.stack.discardTop();
         return lat;
+    }
+
+    private String generateIncrementName() {
+        final int depth = this.stack.getCurrentDepth();
+        return ""+ (char)('i' + (depth + 1));
     }
 }
