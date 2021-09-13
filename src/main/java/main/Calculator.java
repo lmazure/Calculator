@@ -107,7 +107,7 @@ public class Calculator {
                         final List<String> expression = formula.getExpression();
                         final int expressionSize = expression.size();
                         final Instant t1 = Instant.now();
-                        final URI codecogsUri = getCodecogsUri(example);
+                        final String latex = example.getLatex() + "=" + example.getValue();
                         final Instant t2 = Instant.now();
                         final long duration = ChronoUnit.MILLIS.between(t1, t2);
                         for (String s: expression) {
@@ -116,7 +116,7 @@ public class Calculator {
                             if (line == 0) {
                                 writer.write("<td style=\"" + CELL_STYLE + "\">" + htmlEncode(example.getDescription()) + "</td>\n");
                             } else if (line == 1) {
-                                    writer.write("<td style=\"" + CELL_STYLE + "\" rowspan=\"" + (expressionSize - 2) + "\"><iframe frameBorder=\"0\" src=\"" + codecogsUri + "\"></iframe></td>\n");
+                                    writer.write("<td style=\"" + CELL_STYLE + "\" rowspan=\"" + (expressionSize - 2) + "\">&pound;[" + htmlEncode(latex) + "&pound;]</td>\n");
                             } else if (line == (expressionSize - 1)) {
                                 writer.write("<td style=\"" + CELL_STYLE + "\"> duration = " + duration + " ms</td>\n");
                             }
@@ -126,6 +126,9 @@ public class Calculator {
                         writer.write("</table><br>\n");
                     }
                 }
+                writer.write("<script>MathJax={tex:{inlineMath:[['$','$'],['£[','£]']]}};</script>");
+                writer.write("<script src=\"https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>");
+                writer.write("<script id=\"MathJax-script\" async=\"async\" src=\"https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js\"></script>\n");
                 writer.write("</body>\n");
                 writer.write("</html>");
                 displayBrowser(path.toUri());
