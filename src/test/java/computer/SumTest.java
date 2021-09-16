@@ -1,7 +1,6 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -60,20 +59,19 @@ public class SumTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void invalidBoundariesShouldGenerateException() {
-        // -- assert
-        assertThrows(BadBoundsException.class,
-            ()->{
-                // -- arrange
-                final Stack stack = new Stack();
-                final Number n1 = new Number(19.d, "n1");
-                final Number n2 = new Number(7.d, "n2");
-                final VarOperator n3 = new VarOperator(0, stack);
+    void NoLoopShouldGiveZero() {
 
-                // -- act
-                final double effectiveValue = (new SumOperator(n1, n2, n3, stack)).getValue();
-                System.out.println("result = " + effectiveValue);
-            });
+        // -- arrange
+        final Stack stack = new Stack();
+        final Number n1 = new Number(19.d, "n1");
+        final Number n2 = new Number(7.d, "n2");
+        final VarOperator n3 = new VarOperator(0, stack);
+
+        // -- act
+        final double effectiveValue = (new SumOperator(n1, n2, n3, stack)).getValue();
+
+        // -- assert
+        assertEquals(0.d, effectiveValue, 1E-10d);
     }
 
     @Test

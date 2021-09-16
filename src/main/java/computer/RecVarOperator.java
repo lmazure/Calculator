@@ -19,7 +19,7 @@ public class RecVarOperator implements Operand {
 
     @Override
     public String getDescription() {
-        return "recvar " + this.level;
+        return this.stack.getRecursionDescription(this.level);
     }
 
     @Override
