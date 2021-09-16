@@ -27,7 +27,7 @@ public class RecursionOperator implements Operand {
         final int min = (int)Math.round(this.o1.getValue());
         final int max = (int)Math.round(this.o2.getValue());
         if (max < min) {
-            throw new BadBoundsException("Bad bounds (min=" + min + " , max=" + max + ") ");
+            return this.o3.getValue();
         }
         double result = this.o3.getValue();
         for (int i = max ; i >= min; i--) {
@@ -53,10 +53,10 @@ public class RecursionOperator implements Operand {
 
     @Override
     public String getDescription() {
-        final String name = this.stack.getIncrementNameOfTop();
-        this.stack.push(0);
+        final String incrementName = generateIncrementName();
+        this.stack.pushDescription(incrementName, "recvar " + (this.stack.getCurrentDepth() + 1));
         final String desc = "for " +
-                            name +
+                            incrementName +
                             " equal " +
                             this.o1.getDescription() +
                             " to " +
@@ -73,12 +73,40 @@ public class RecursionOperator implements Operand {
     @Override
     public String getLatex() {
 
-        String result = "...";
-        for (int i = 0 ; i < 3; i++) {
-            this.stack.pushLatex(result);
+        final int min = (int)Math.round(this.o1.getValue());
+        final int max = (int)Math.round(this.o2.getValue());
+        if (max < min) {
+            return this.o3.getLatex();
+        }
+        final int numberOfRecursions = max - min + 1;
+        final int numberOfDisplayedStartRecursions = 2;
+        final int numberOfDisplayedEndRecursions = 2;
+        if (numberOfRecursions < (numberOfDisplayedStartRecursions + numberOfDisplayedEndRecursions)) {
+            String result = this.o3.getLatex();
+            for (int i = max ; i >= min; i--) {
+                this.stack.pushLatex(Integer.toString(i), result);
+                result = this.o4.getLatex();
+                this.stack.discardTop();
+            }
+        }
+        String result = this.o3.getLatex();
+        for (int i = 0 ; i < numberOfDisplayedEndRecursions; i++) {
+            this.stack.pushLatex(Integer.toString(max - i), result);
+            result = this.o4.getLatex();
+            this.stack.discardTop();
+        }
+        
+        result = "... " + result;
+        for (int i = 0 ; i < numberOfDisplayedStartRecursions; i++) {
+            this.stack.pushLatex(Integer.toString(min + numberOfDisplayedStartRecursions - 1 - i), result);
             result = this.o4.getLatex();
             this.stack.discardTop();
         }
         return result;
+    }
+
+    private String generateIncrementName() {
+        final int depth = this.stack.getCurrentDepth();
+        return ""+ (char)('i' + (depth + 1));
     }
 }

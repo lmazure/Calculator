@@ -1,7 +1,6 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -79,21 +78,24 @@ public class RecursionTest {
 
     @Test
     @SuppressWarnings("static-method")
-    void invalidBoundariesShouldGenerateException() {
-        // -- assert
-        assertThrows(BadBoundsException.class,
-            ()->{
-                // -- arrange
-                final Stack stack = new Stack();
-                final Number n1 = new Number(19.d, "n1");
-                final Number n2 = new Number(7.d, "n2");
-                final Number n3 = new Number(0.d, "n3");
-                final VarOperator n4 = new VarOperator(0, stack);
+    void noRecursionShouldGiveInitialValue() {
 
-                // -- act
-                final double effectiveValue = (new RecursionOperator(n1, n2, n3, n4, stack)).getValue();
-                System.out.println("result = " + effectiveValue);
-            });
+        // -- arrange
+        final Stack stack = new Stack();
+        final Number n1 = new Number(19.d, "n1");
+        final Number n2 = new Number(7.d, "n2");
+        final Number n3 = new Number(12345.d, "n3");
+        final RecVarOperator rec = new RecVarOperator(0, stack);
+        final Number one = new Number(1d, "1");
+        final AddOperator add = new AddOperator(one, rec);
+        final DivideOperator divide = new DivideOperator(one, add);
+        final RecursionOperator recursion = new RecursionOperator(n1, n2, n3, divide, stack);
+
+        // -- act
+        final double effectiveValue = recursion.getValue();
+
+        // -- assert
+        assertEquals(12345.d, effectiveValue, 1E-10d);
     }
 
     @Test

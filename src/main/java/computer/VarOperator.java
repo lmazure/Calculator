@@ -18,12 +18,12 @@ public class VarOperator implements Operand {
 
     @Override
     public String getDescription() {
-        return Stack.getIncrementName(this.level);
+        return this.stack.getIncrementDescription(this.level);
     }
 
     @Override
     public String getLatex() {
-        return Stack.getIncrementName(this.level);
+        return this.stack.getIncrementLatex(this.level);
     }
 
 
