@@ -27,7 +27,7 @@ public class RecursionOperator implements Operand {
         final int min = (int)Math.round(this.o1.getValue());
         final int max = (int)Math.round(this.o2.getValue());
         if (max < min) {
-            throw new BadBoundsException("Bad bounds (min=" + min + " , max=" + max + ") ");
+            return this.o3.getValue();
         }
         double result = this.o3.getValue();
         for (int i = max ; i >= min; i--) {
@@ -74,10 +74,31 @@ public class RecursionOperator implements Operand {
     public String getLatex() {
 
         final int min = (int)Math.round(this.o1.getValue());
-        final int numberOfDisplayedRecursions = 5;
-        String result = "...";
-        for (int i = 0 ; i < numberOfDisplayedRecursions; i++) {
-            this.stack.pushLatex(Integer.toString(min + numberOfDisplayedRecursions - 1 - i), result);
+        final int max = (int)Math.round(this.o2.getValue());
+        if (max < min) {
+            return this.o3.getLatex();
+        }
+        final int numberOfRecursions = max - min + 1;
+        final int numberOfDisplayedStartRecursions = 2;
+        final int numberOfDisplayedEndRecursions = 2;
+        if (numberOfRecursions < (numberOfDisplayedStartRecursions + numberOfDisplayedEndRecursions)) {
+            String result = this.o3.getLatex();
+            for (int i = max ; i >= min; i--) {
+                this.stack.pushLatex(Integer.toString(i), result);
+                result = this.o4.getLatex();
+                this.stack.discardTop();
+            }
+        }
+        String result = this.o3.getLatex();
+        for (int i = 0 ; i < numberOfDisplayedEndRecursions; i++) {
+            this.stack.pushLatex(Integer.toString(max - i), result);
+            result = this.o4.getLatex();
+            this.stack.discardTop();
+        }
+        
+        result = "... " + result;
+        for (int i = 0 ; i < numberOfDisplayedStartRecursions; i++) {
+            this.stack.pushLatex(Integer.toString(min + numberOfDisplayedStartRecursions - 1 - i), result);
             result = this.o4.getLatex();
             this.stack.discardTop();
         }

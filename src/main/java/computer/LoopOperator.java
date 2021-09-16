@@ -37,7 +37,7 @@ abstract public class LoopOperator implements Operand {
         final int min = (int)Math.round(this.o1.getValue());
         final int max = (int)Math.round(this.o2.getValue());
         if (max < min) {
-            throw new BadBoundsException("Bad bounds (min=" + min + " , max=" + max + ")");
+            return this.initialValue;
         }
         double result = this.initialValue;
         for (int i = min ; i <= max; i++) {
