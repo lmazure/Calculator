@@ -12,7 +12,6 @@ variables:
 cache:
   paths:
     - .m2/repository/
-    - target/
 
 build:
   stage: build
@@ -20,6 +19,10 @@ build:
     - maven
   script:
     - mvn $MAVEN_CLI_OPTS compile
+  artifacts:
+    expire_in: 30 min
+    paths: 
+      - target/
 
 test:
   stage: test
@@ -41,7 +44,7 @@ package:
   tags:
     - maven
   script:
-    - mvn $MAVEN_CLI_OPTS package
+    - mvn $MAVEN_CLI_OPTS -Dmaven.test.skip package
   artifacts:
     paths:
       - target/*.jar
