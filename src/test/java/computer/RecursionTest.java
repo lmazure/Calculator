@@ -2,7 +2,6 @@ package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -150,7 +149,6 @@ public class RecursionTest {
 
     @Test
     @SuppressWarnings("static-method")
-    @Disabled
     void checkDescriptionOfNestedProducts() {
 
         // -- arrange
@@ -170,7 +168,6 @@ public class RecursionTest {
     }
 
     @Test
-    @Disabled
     @SuppressWarnings("static-method")
     void checkLatex() {
 
