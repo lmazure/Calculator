@@ -1,6 +1,7 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,38 @@ public class AtanhTest {
         // -- assert
         // Math.tanh does not exist, so we use Math.tanh to cjeck
         assertEquals(value, Math.tanh(effectiveValue), 1E-10d);
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void arctanhOfValueLessThanMinusOneShouldThrowException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(-1.001d, "n1");
+
+                // -- act
+                final double effectiveValue = (new AtanhOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
+    }
+
+    @Test
+    @SuppressWarnings("static-method")
+    void arctanhOfValueGreaterOneShouldThrowException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(1.001d, "n1");
+
+                // -- act
+                final double effectiveValue = (new AtanhOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
     }
 
     @Test

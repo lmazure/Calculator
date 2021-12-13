@@ -7,6 +7,10 @@ public class AcoshOperator extends SimpleBracketedUnaryOperator {
     }
 
     private static double acosh(final double value) {
+        if (value < 1.0d) {
+            throw new ArithmeticException("acosh of a value smaller than 1");
+        }
+
         return Math.log(value + Math.sqrt(value * value - 1));
     }
 

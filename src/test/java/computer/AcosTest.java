@@ -30,7 +30,7 @@ public class AcosTest {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
-                final Number n1 = new Number(-2.0d, "n1");
+                final Number n1 = new Number(-1.001d, "n1");
 
                 // -- act
                 final double effectiveValue = (new AcosOperator(n1)).getValue();
@@ -46,7 +46,7 @@ public class AcosTest {
         assertThrows(ArithmeticException.class,
             ()->{
                 // -- arrange
-                final Number n1 = new Number(2.0d, "n1");
+                final Number n1 = new Number(1.001d, "n1");
 
                 // -- act
                 final double effectiveValue = (new AcosOperator(n1)).getValue();
