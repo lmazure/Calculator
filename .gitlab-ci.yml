@@ -15,8 +15,6 @@ cache:
 
 build:
   stage: build
-  tags:
-    - maven
   script:
     - mvn $MAVEN_CLI_OPTS compile
   artifacts:
@@ -26,10 +24,8 @@ build:
 
 test:
   stage: test
-  tags:
-    - maven
   script:
-    - rm target/surefire-reports/TEST-*.xml
+    - rm -f target/surefire-reports/TEST-*.xml
     - mvn $MAVEN_CLI_OPTS test
   artifacts:
     when: always
@@ -39,8 +35,6 @@ test:
 
 package:
   stage: package
-  tags:
-    - maven
   script:
     - mvn $MAVEN_CLI_OPTS -Dmaven.test.skip package
   artifacts:
