@@ -7,6 +7,12 @@ public class AtanhOperator extends SimpleBracketedUnaryOperator {
     }
 
     private static double atanh(final double value) {
+        if (value < -1.0d) {
+            throw new ArithmeticException("atanh of a value smaller than -1");
+        }
+        if (value > 1.0d) {
+            throw new ArithmeticException("atanh of a value greater than 1");
+        }
         return 0.5d * Math.log((1 + value)/(1 - value));
     }
 

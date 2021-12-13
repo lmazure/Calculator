@@ -1,6 +1,7 @@
 package computer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,22 @@ public class AcoshTest {
         assertEquals(value, Math.cosh(effectiveValue), 1E-10d);
     }
 
+    @Test
+    @SuppressWarnings("static-method")
+    void arccoshOfValueLessThanOneShouldThrowException() {
+
+        // -- assert
+        assertThrows(ArithmeticException.class,
+            ()->{
+                // -- arrange
+                final Number n1 = new Number(0.5d, "n1");
+
+                // -- act
+                final double effectiveValue = (new AcoshOperator(n1)).getValue();
+                System.out.println("result = " + effectiveValue);
+            });
+    }
+    
     @Test
     @SuppressWarnings("static-method")
     void checkDescription() {
