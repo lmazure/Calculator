@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
- public class MultiplyTest {
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+@ExtendWith(ReportPortalExtension.class)
+public class MultiplyTest {
 
     @Test
     @SuppressWarnings("static-method")

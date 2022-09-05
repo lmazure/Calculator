@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+@ExtendWith(ReportPortalExtension.class)
 public class RecursionTest {
 
     @ParameterizedTest

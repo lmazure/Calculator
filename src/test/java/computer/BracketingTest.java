@@ -12,6 +12,9 @@ import main.Calculator;
 import main.CommandLineParser;
 import main.Parser;
 
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+@ExtendWith(ReportPortalExtension.class)
 public class BracketingTest {
 
     @ParameterizedTest

@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import com.epam.reportportal.junit5.ReportPortalExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
+@ExtendWith(ReportPortalExtension.class)
 public class SqrtTest {
 
     @Test

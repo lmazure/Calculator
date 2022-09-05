@@ -13,7 +13,6 @@ public class SimpleBracketedUnaryOperator extends SimpleUnaryOperator {
         this.syntax = syntax;
     }
 
-
     @Override
     public String getLatex() {
         return this.syntax + "(" + this.o1.getLatex() + ")";

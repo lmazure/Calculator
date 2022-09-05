@@ -29,7 +29,7 @@ public class FormulaRepository {
                                       "1", "4", "42", "2", "power", "multiply",
                                       "pi", "2", "power", "2", "var 0", "multiply", "1", "subtract", "2" , "power", "multiply", "divide", "subtract", "product",
                                       "42", "cos", "subtract"),
-            new Formula(0.0d , 1e-6d, "pi",
+            new Formula(0.0d , 1e-9d, "pi",
                                       "1", "100000000", "1",
                                       "4", "var 0", "multiply", "2", "subtract",
                                       "pi", "2", "power", "recvar 0", "divide", "add", "recursion", "divide",
